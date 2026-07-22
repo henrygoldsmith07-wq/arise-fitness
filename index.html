@@ -1,11 +1,312 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>ARISE</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#0f0f12">
+<title>ARISE</title>
+<style>
+:root{--bg:#0f0f12;--surface:#16161a;--card:#1c1c21;--border:#2a2a32;--border-soft:#232329;--text:#f4f4f5;--muted:#a1a1aa;--faint:#71717a;--accent:#7c6af0;--accent-soft:rgba(124,106,240,.12);--cyan:#38bdf8;--green:#4ade80;--gold:#fbbf24;--danger:#f87171;--radius:14px;--radius-sm:10px}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100dvh;line-height:1.5;-webkit-font-smoothing:antialiased;font-size:15px}
+.app{max-width:420px;margin:0 auto;min-height:100dvh;padding-bottom:calc(78px + env(safe-area-inset-bottom));position:relative}
+header{position:sticky;top:0;z-index:40;padding:16px 20px 14px;background:rgba(15,15,18,.9);backdrop-filter:blur(20px);border-bottom:1px solid var(--border-soft)}
+.header-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.logo{font-size:1.15rem;font-weight:700;letter-spacing:3px;color:var(--text)}
+.rank-pill{font-size:.65rem;font-weight:600;letter-spacing:.8px;padding:5px 11px;border-radius:100px;border:1px solid;text-transform:uppercase}
+.rank-E{color:#a1a1aa;border-color:#3f3f46;background:#1c1c21}
+.rank-D{color:#4ade80;border-color:rgba(74,222,128,.35);background:rgba(74,222,128,.08)}
+.rank-C{color:#38bdf8;border-color:rgba(56,189,248,.35);background:rgba(56,189,248,.08)}
+.rank-B{color:#a78bfa;border-color:rgba(167,139,250,.35);background:rgba(167,139,250,.08)}
+.rank-A{color:#f472b6;border-color:rgba(244,114,182,.35);background:rgba(244,114,182,.08)}
+.rank-S{color:#fbbf24;border-color:rgba(251,191,36,.4);background:rgba(251,191,36,.1)}
+.xp-meta{display:flex;justify-content:space-between;font-size:.75rem;color:var(--muted);margin-bottom:6px}
+.xp-track{height:6px;background:var(--card);border-radius:100px;overflow:hidden}
+.xp-fill{height:100%;background:var(--accent);border-radius:100px;transition:width .5s ease}
+main{padding:16px 16px 24px}
+.block{background:var(--surface);border:1px solid var(--border-soft);border-radius:var(--radius);padding:16px;margin-bottom:12px}
+.block-label{font-size:.68rem;font-weight:600;letter-spacing:.9px;text-transform:uppercase;color:var(--faint);margin-bottom:12px;display:flex;align-items:center}
+.block-label span{margin-left:auto;font-weight:500;letter-spacing:0;text-transform:none;color:var(--muted);font-size:.78rem}
+.system{background:var(--accent-soft);border:1px solid rgba(124,106,240,.2);border-radius:var(--radius);padding:14px 16px;font-size:.9rem;color:var(--muted);margin-bottom:12px;line-height:1.45}
+.system strong{color:var(--accent);font-weight:600}
+.focus{background:var(--surface);border:1px solid var(--border-soft);border-radius:var(--radius);padding:14px 16px;margin-bottom:12px}
+.focus-label{font-size:.65rem;font-weight:600;letter-spacing:.8px;text-transform:uppercase;color:var(--faint);margin-bottom:4px}
+.focus-text{font-size:.95rem;font-weight:600;color:var(--text)}
+.recover{background:rgba(74,222,128,.06);border:1px solid rgba(74,222,128,.18);border-radius:var(--radius);padding:12px 14px;margin-bottom:12px;font-size:.85rem;color:var(--muted);line-height:1.4}
+.recover strong{color:var(--green);font-weight:600}
+.item{background:var(--card);border:1px solid var(--border-soft);border-radius:var(--radius-sm);padding:14px;margin-bottom:8px}
+.item.done{border-color:rgba(74,222,128,.3);background:rgba(74,222,128,.05)}
+.item-row{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:4px}
+.item-name{font-weight:600;font-size:.95rem;color:var(--text)}
+.item-xp{font-size:.7rem;font-weight:600;color:var(--accent);background:var(--accent-soft);padding:3px 9px;border-radius:100px;white-space:nowrap}
+.item-desc{font-size:.82rem;color:var(--muted);margin-bottom:12px;line-height:1.4}
+.item-actions{display:flex;gap:8px;flex-wrap:wrap}
+button{font-family:inherit;border:none;border-radius:10px;padding:10px 16px;font-size:.85rem;font-weight:600;cursor:pointer;transition:opacity .15s,transform .1s}
+button:active{transform:scale(.98)}button:disabled{opacity:.4;cursor:not-allowed}
+.btn-primary{background:var(--accent);color:#fff}
+.btn-secondary{background:transparent;color:var(--text);border:1px solid var(--border)}
+.btn-success{background:var(--green);color:#052e16}
+.btn-gold{background:rgba(251,191,36,.12);color:var(--gold);border:1px solid rgba(251,191,36,.3)}
+.btn-full{width:100%}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.stat{background:var(--card);border-radius:var(--radius-sm);padding:12px 10px;text-align:center;border:1px solid var(--border-soft)}
+.stat-label{font-size:.65rem;color:var(--faint);text-transform:uppercase;letter-spacing:.6px;margin-bottom:2px}
+.stat-value{font-size:1.25rem;font-weight:700;color:var(--text)}
+.skill{background:var(--card);border:1px solid var(--border-soft);border-radius:var(--radius-sm);padding:14px;margin-bottom:10px}
+.skill-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.skill-name{font-weight:600;font-size:.95rem}
+.skill-stage{font-size:.68rem;font-weight:600;color:var(--accent);background:var(--accent-soft);padding:3px 9px;border-radius:100px}
+.ladder{display:flex;flex-direction:column;gap:3px;margin-bottom:12px}
+.ladder-step{display:flex;align-items:center;gap:10px;font-size:.8rem;padding:6px 8px;border-radius:8px;color:var(--faint)}
+.ladder-step.done{color:var(--muted)}
+.ladder-step.current{background:var(--accent-soft);color:var(--text);font-weight:500}
+.ladder-dot{width:7px;height:7px;border-radius:50%;background:var(--border);flex-shrink:0}
+.ladder-step.done .ladder-dot{background:var(--green)}
+.ladder-step.current .ladder-dot{background:var(--accent);box-shadow:0 0 0 3px rgba(124,106,240,.2)}
+.skill-tip{font-size:.8rem;color:var(--muted);background:rgba(255,255,255,.03);border-radius:8px;padding:10px 12px;margin-bottom:10px;line-height:1.45}
+.skill-tip strong{color:var(--text);font-weight:600}
+.skill-mistake{display:block;margin-top:6px;color:#fca5a5;font-size:.76rem}
+.skill-progress{font-size:.78rem;color:var(--muted);margin-bottom:10px}
+.skill-progress strong{color:var(--text)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{font-size:.78rem;font-weight:500;padding:7px 14px;border-radius:100px;border:1px solid var(--border);background:transparent;color:var(--muted)}
+.chip.active{border-color:var(--accent);background:var(--accent-soft);color:var(--text)}
+nav{position:fixed;bottom:0;left:0;right:0;max-width:420px;margin:0 auto;background:rgba(15,15,18,.94);backdrop-filter:blur(20px);border-top:1px solid var(--border-soft);display:flex;justify-content:space-around;padding:8px 0 calc(8px + env(safe-area-inset-bottom));z-index:50}
+.nav-btn{background:none;border:none;color:var(--faint);font-size:.65rem;font-weight:500;display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 12px;border-radius:10px}
+.nav-btn.active{color:var(--accent)}
+.nav-icon{font-size:1.2rem}
+.screen{display:none}
+.screen.active{display:block;animation:in .22s ease}
+@keyframes in{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
+.onboard{position:fixed;inset:0;background:var(--bg);z-index:100;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:28px 22px;overflow-y:auto}
+.onboard.hidden{display:none}
+.onboard-logo{font-size:1.8rem;font-weight:800;letter-spacing:4px;margin-bottom:8px;color:var(--text)}
+.onboard-sub{color:var(--muted);text-align:center;margin-bottom:32px;font-size:.95rem}
+.step{width:100%;max-width:320px;display:none}
+.step.active{display:block;animation:in .25s ease}
+.step h2{font-size:1.25rem;font-weight:700;text-align:center;margin-bottom:6px}
+.step p{text-align:center;color:var(--muted);font-size:.9rem;margin-bottom:22px}
+.choice{display:block;width:100%;text-align:left;background:var(--surface);border:1.5px solid var(--border);border-radius:12px;padding:15px 16px;margin-bottom:8px;color:var(--text);font-size:.95rem;font-weight:500}
+.choice.selected{border-color:var(--accent);background:var(--accent-soft)}
+input[type=text]{width:100%;background:var(--surface);border:1.5px solid var(--border);border-radius:12px;padding:14px 16px;color:var(--text);font-size:1rem;margin-bottom:18px;outline:none;font-family:inherit}
+input[type=text]:focus{border-color:var(--accent)}
+.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:80;display:none;align-items:center;justify-content:center;padding:18px}
+.modal-bg.show{display:flex}
+.modal{background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:20px;width:100%;max-width:360px;max-height:85dvh;overflow-y:auto}
+.modal h3{text-align:center;font-size:1.15rem;font-weight:700;margin-bottom:4px}
+.modal .sub{text-align:center;color:var(--muted);font-size:.82rem;margin-bottom:16px}
+.bar{height:5px;background:var(--card);border-radius:100px;margin-bottom:16px;overflow:hidden}
+.bar>div{height:100%;background:var(--green);border-radius:100px;transition:width .25s}
+.ex{background:var(--card);border-radius:10px;padding:12px;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center;gap:10px;border:1px solid transparent}
+.ex.done{border-color:rgba(74,222,128,.3)}
+.ex-name{font-weight:600;font-size:.9rem}
+.ex-meta{font-size:.75rem;color:var(--muted);margin-top:1px}
+.log{display:flex;align-items:center;gap:6px}
+.log button{width:32px;height:32px;border-radius:8px;background:var(--bg);border:1px solid var(--border);color:var(--text);font-size:1.05rem;display:flex;align-items:center;justify-content:center;padding:0}
+.log span{min-width:22px;text-align:center;font-weight:700;font-size:.9rem}
+.levelup{position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:120;display:none;flex-direction:column;align-items:center;justify-content:center}
+.levelup.show{display:flex}
+.levelup h1{font-size:2rem;font-weight:800;letter-spacing:1px;color:var(--text)}
+.levelup p{margin-top:10px;font-size:1.05rem;color:var(--muted)}
+.toast{position:fixed;top:72px;left:50%;transform:translateX(-50%) translateY(-8px);background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:11px 18px;font-size:.88rem;z-index:110;opacity:0;transition:all .25s ease;pointer-events:none;max-width:88%;text-align:center;box-shadow:0 8px 30px rgba(0,0,0,.35)}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.rank-title{font-size:.8rem;color:var(--muted);margin-top:6px}
+.boss{border-color:rgba(251,191,36,.25);background:rgba(251,191,36,.04)}
+.badge{font-size:.62rem;font-weight:700;padding:2px 7px;border-radius:6px;background:rgba(251,191,36,.15);color:var(--gold);margin-left:6px;vertical-align:middle}
+.empty{text-align:center;padding:20px 12px;color:var(--faint);font-size:.9rem}
+.note{font-size:.82rem;color:var(--muted);background:rgba(255,255,255,.03);border-radius:10px;padding:11px 13px;margin-bottom:14px;line-height:1.45}
+.rest-timer{background:var(--accent-soft);border:1px solid rgba(124,106,240,.25);border-radius:12px;padding:14px;margin-bottom:14px;text-align:center}
+.rest-timer-label{font-size:.7rem;font-weight:600;letter-spacing:.8px;text-transform:uppercase;color:var(--faint);margin-bottom:4px}
+.rest-timer-time{font-size:2.2rem;font-weight:700;font-variant-numeric:tabular-nums;color:var(--accent);letter-spacing:1px}
+.rest-timer-actions{display:flex;gap:8px;justify-content:center;margin-top:10px}
+.pr-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--border-soft);font-size:.88rem}
+.pr-row:last-child{border-bottom:none}
+.pr-name{font-weight:500}
+.pr-value{color:var(--accent);font-weight:600}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-top:8px}
+.cal-day{aspect-ratio:1;border-radius:8px;background:var(--card);display:flex;align-items:center;justify-content:center;font-size:.7rem;color:var(--faint)}
+.cal-day.active{background:var(--accent-soft);color:var(--accent);font-weight:600}
+.cal-day.today{border:1px solid var(--accent)}
+.cal-label{font-size:.65rem;text-align:center;color:var(--faint);margin-bottom:4px}
+</style>
 </head>
 <body>
-  <h1>ARISE — Loading full app...</h1>
-  <p>If you see this, the full file upload is still in progress. Please refresh in a moment.</p>
+<div class="app" id="app">
+<header>
+<div class="header-top"><div class="logo">ARISE</div><div class="rank-pill rank-E" id="rankPill">E-RANK</div></div>
+<div class="xp-meta"><span>Level <strong id="levelNum">1</strong></span><span id="xpText">0 / 100 XP</span></div>
+<div class="xp-track"><div class="xp-fill" id="xpFill" style="width:0%"></div></div>
+</header>
+<main>
+<div class="screen active" id="screen-home">
+<div class="system" id="systemMsg"><strong>[SYSTEM]</strong> Welcome. Complete your Daily Quests to grow stronger.</div>
+<div class="focus"><div class="focus-label">Today’s Focus</div><div class="focus-text" id="focusText">Complete your Daily Quests</div></div>
+<div class="recover" id="recoverBox" style="display:none"><strong>Recovery · </strong><span id="recoverText"></span></div>
+<div class="block"><div class="block-label">Daily Quests <span id="questCount">0/0</span></div><div id="questList"></div></div>
+<div class="block"><div class="block-label">This Week</div><div id="weeklyBox"></div></div>
+<div class="block"><div class="block-label">Attributes</div><div class="stats" id="quickStats"></div></div>
+</div>
+<div class="screen" id="screen-train">
+<div class="block"><div class="block-label">Weekly Focus</div><div class="note">Choose what you want to emphasize.</div><div class="chips" id="weekFocus">
+<button class="chip" data-f="strength" onclick="setWeekFocus('strength')">Strength</button>
+<button class="chip" data-f="endurance" onclick="setWeekFocus('endurance')">Endurance</button>
+<button class="chip" data-f="skill" onclick="setWeekFocus('skill')">Skill</button>
+<button class="chip" data-f="balanced" onclick="setWeekFocus('balanced')">Balanced</button>
+</div></div>
+<div class="block"><div class="block-label">Programs</div><div class="note">Structured plans for steady progress.</div><div id="programList"></div></div>
+<div class="block"><div class="block-label">Skill Paths</div><div class="note">Practice a few times, then Advance.</div><div id="skillList"></div></div>
+<div class="block"><div class="block-label">Ranked Workouts</div><div id="workoutList"></div></div>
+</div>
+<div class="screen" id="screen-boss">
+<div class="block"><div class="block-label">Weekly Challenge</div><div id="weeklyChallenge"></div></div>
+<div class="block"><div class="block-label">Boss Raids</div><div class="note">Harder challenges for bigger rewards.</div><div id="bossRaid"></div></div>
+</div>
+<div class="screen" id="screen-profile">
+<div class="block" style="text-align:center;padding-top:22px;padding-bottom:22px">
+<div style="font-size:1.5rem;font-weight:700;margin-bottom:6px" id="hunterName">Hunter</div>
+<div class="rank-pill rank-E" id="profileRank" style="display:inline-block">E-RANK</div>
+<div class="rank-title" id="rankTitle">Novice Hunter</div>
+<div style="margin-top:14px;font-size:.9rem;color:var(--muted)">Level <span id="profileLevel">1</span> · Streak <span id="streakNum">0</span> days</div>
+</div>
+<div class="block"><div class="block-label">Attributes</div><div class="stats" id="fullStats"></div></div>
+<div class="block"><div class="block-label">Lifetime</div><div class="stats" id="lifeStats"></div></div>
+<div class="block"><div class="block-label">Personal Records</div><div id="prList"><div class="empty">Complete workouts to set records</div></div></div>
+<div class="block"><div class="block-label">Activity</div><div class="cal-label">Last 28 days</div><div class="cal-grid" id="calGrid"></div></div>
+<div class="block"><div class="block-label">Settings</div>
+<button class="btn-secondary btn-full" style="margin-bottom:8px" onclick="refreshQuests()">Refresh Daily Quests</button>
+<button class="btn-secondary btn-full" style="margin-bottom:8px" onclick="exportSave()">Export Progress</button>
+<button class="btn-secondary btn-full" style="color:var(--danger);border-color:rgba(248,113,113,.4)" onclick="resetAll()">Reset Everything</button>
+</div>
+</div>
+</main>
+<nav>
+<button class="nav-btn active" data-s="home"><span class="nav-icon">⚔️</span>Quests</button>
+<button class="nav-btn" data-s="train"><span class="nav-icon">💪</span>Train</button>
+<button class="nav-btn" data-s="boss"><span class="nav-icon">🐉</span>Raid</button>
+<button class="nav-btn" data-s="profile"><span class="nav-icon">👤</span>Profile</button>
+</nav>
+</div>
+
+<div class="onboard" id="onboard">
+<div class="onboard-logo">ARISE</div>
+<div class="onboard-sub">The System has found you.<br>Ready to level up?</div>
+<div class="step active" id="s1"><h2>Hunter Name</h2><p>What should The System call you?</p>
+<input type="text" id="nameInput" placeholder="Your name" maxlength="16" autocomplete="off">
+<button class="btn-primary btn-full" onclick="goStep(2)">Continue</button></div>
+<div class="step" id="s2"><h2>Your Level</h2><p>Be honest so The System can help you.</p>
+<button class="choice" data-v="beginner" onclick="pick(this,'fit')">Just starting</button>
+<button class="choice" data-v="intermediate" onclick="pick(this,'fit')">Train regularly</button>
+<button class="choice" data-v="advanced" onclick="pick(this,'fit')">Very experienced</button>
+<button class="btn-primary btn-full" id="b2" disabled onclick="goStep(3)" style="margin-top:14px">Continue</button></div>
+<div class="step" id="s3"><h2>Main Goal</h2><p>What do you want most right now?</p>
+<button class="choice" data-v="strength" onclick="pick(this,'goal')">Get stronger</button>
+<button class="choice" data-v="endurance" onclick="pick(this,'goal')">More endurance</button>
+<button class="choice" data-v="balanced" onclick="pick(this,'goal')">All-around fit</button>
+<button class="btn-primary btn-full" id="b3" disabled onclick="finishOnboard()" style="margin-top:14px">Awaken</button></div>
+</div>
+
+<div class="modal-bg" id="modal">
+<div class="modal">
+<h3 id="mTitle">Workout</h3>
+<div class="sub" id="mSub"></div>
+<div class="bar"><div id="mProg" style="width:0%"></div></div>
+<div class="rest-timer" id="restTimer" style="display:none">
+<div class="rest-timer-label">Rest Timer</div>
+<div class="rest-timer-time" id="restTime">01:30</div>
+<div class="rest-timer-actions">
+<button class="btn-secondary" onclick="adjustRest(-15)">−15s</button>
+<button class="btn-primary" onclick="toggleRest()">Start</button>
+<button class="btn-secondary" onclick="adjustRest(15)">+15s</button>
+</div></div>
+<div id="mEx"></div>
+<div style="display:flex;gap:8px;margin-top:16px">
+<button class="btn-secondary" style="flex:1" onclick="closeModal()">Close</button>
+<button class="btn-gold" style="flex:1" onclick="markAll()">Mark All</button>
+<button class="btn-success" style="flex:1.2" onclick="finishWorkout()">Claim XP</button>
+</div></div></div>
+
+<div class="levelup" id="levelup">
+<h1>LEVEL UP</h1>
+<p id="levelupText">You reached Level 2</p>
+<button class="btn-primary" style="margin-top:28px;padding:12px 28px" onclick="closeLevelup()">Continue</button>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+// Core data and full app logic (compressed for upload)
+const RANKS=[{rank:"E",min:1,title:"Novice Hunter",msg:"You have taken the first step."},{rank:"D",min:5,title:"Apprentice Hunter",msg:"Your body is beginning to adapt."},{rank:"C",min:12,title:"Trusted Hunter",msg:"Consistency is becoming your strength."},{rank:"B",min:22,title:"Elite Hunter",msg:"Few reach this level of discipline."},{rank:"A",min:35,title:"High-Rank Hunter",msg:"Your presence is growing."},{rank:"S",min:50,title:"Shadow Commander",msg:"You now stand among the strongest."}];
+const SKILLS={pushup:{name:"Push-up Path",need:3,levels:[{name:"Wall Push-ups",reps:"2×12",tip:"Keep body straight.",mistake:"Avoid bending at hips."},{name:"Knee Push-ups",reps:"3×8",tip:"Hands under shoulders.",mistake:"Avoid hip sag."},{name:"Full Push-ups",reps:"3×10",tip:"Straight line head to heels.",mistake:"Avoid flaring elbows."},{name:"Diamond Push-ups",reps:"3×8",tip:"Hands in diamond, elbows close.",mistake:"Avoid shrugging."},{name:"Archer Push-ups",reps:"3×5 each",tip:"Shift weight to one arm.",mistake:"Avoid twisting hips."},{name:"Pseudo Planche Lean",reps:"3×20s",tip:"Lean forward, straight arms.",mistake:"Avoid bending elbows."}]},squat:{name:"Squat Path",need:3,levels:[{name:"Assisted Squats",reps:"3×10",tip:"Sit back as into a chair.",mistake:"Avoid knees collapsing."},{name:"Bodyweight Squats",reps:"3×15",tip:"Knees track over toes.",mistake:"Avoid rising on toes."},{name:"Jump Squats",reps:"3×10",tip:"Land softly.",mistake:"Avoid locked knees."},{name:"Bulgarian Split Squats",reps:"3×8 each",tip:"Front knee over ankle.",mistake:"Avoid knee too far forward."},{name:"Shrimp Squat Progress",reps:"3×5 each",tip:"Lower with control.",mistake:"Avoid rushing."},{name:"Pistol Squat Progress",reps:"3×3 each",tip:"Use support while building.",mistake:"Avoid knee collapse."}]},core:{name:"Core Path",need:3,levels:[{name:"Knee Plank",reps:"3×20s",tip:"Hips level.",mistake:"Avoid lower back sag."},{name:"Full Plank",reps:"3×30s",tip:"Straight body, breathe.",mistake:"Avoid holding breath."},{name:"Side Plank",reps:"3×20s each",tip:"Keep hips high.",mistake:"Avoid rotating hip."},{name:"Hollow Hold",reps:"3×25s",tip:"Lower back pressed down.",mistake:"Avoid arching."},{name:"L-Sit Progress",reps:"3×12s",tip:"Chest tall, lift legs.",mistake:"Avoid rounded shoulders."},{name:"Dragon Flag Progress",reps:"3×5",tip:"Body rigid.",mistake:"Avoid bending only at hips."}]},pull:{name:"Pull Path",need:3,levels:[{name:"Scapular Pulls",reps:"3×8",tip:"Pull shoulder blades down.",mistake:"Avoid using arms."},{name:"Australian Pull-ups",reps:"3×8",tip:"Chest to bar, body straight.",mistake:"Avoid hip sag."},{name:"Negative Pull-ups",reps:"3×5",tip:"Lower slowly.",mistake:"Avoid dropping fast."},{name:"Pull-ups",reps:"3×5",tip:"Chin over bar, control down.",mistake:"Avoid swinging."},{name:"Chest-to-Bar",reps:"3×4",tip:"Chest near bar.",mistake:"Avoid stopping at chin."},{name:"Archer Pull-ups",reps:"3×3 each",tip:"Pull to one side.",mistake:"Avoid rotating body."}]}};
+const WORKOUTS=[{id:"e1",rank:"E",name:"First Steps",time:"12 min",xp:50,ex:[{n:"Jumping Jacks",s:2,r:20,u:"reps"},{n:"Knee Push-ups",s:2,r:8,u:"reps"},{n:"Bodyweight Squats",s:2,r:12,u:"reps"},{n:"Knee Plank",s:2,r:20,u:"sec"}]},{id:"e2",rank:"E",name:"Shadow Warm-up",time:"14 min",xp:55,ex:[{n:"High Knees",s:3,r:25,u:"sec"},{n:"Glute Bridges",s:3,r:12,u:"reps"},{n:"Crunches",s:2,r:15,u:"reps"},{n:"Wall Sit",s:2,r:25,u:"sec"}]},{id:"d1",rank:"D",name:"Gate Clear",time:"18 min",xp:85,ex:[{n:"Push-ups",s:3,r:12,u:"reps"},{n:"Squats",s:3,r:15,u:"reps"},{n:"Lunges",s:2,r:10,u:"reps"},{n:"Mountain Climbers",s:3,r:20,u:"reps"},{n:"Plank",s:2,r:35,u:"sec"}]},{id:"d2",rank:"D",name:"Hunter Drill",time:"20 min",xp:95,ex:[{n:"Burpees",s:3,r:8,u:"reps"},{n:"Diamond Push-ups",s:3,r:8,u:"reps"},{n:"Jump Squats",s:3,r:12,u:"reps"},{n:"Russian Twists",s:3,r:20,u:"reps"},{n:"Side Plank",s:2,r:25,u:"sec"}]},{id:"c1",rank:"C",name:"Double Gate",time:"25 min",xp:140,ex:[{n:"Push-ups",s:4,r:15,u:"reps"},{n:"Pike Push-ups",s:3,r:10,u:"reps"},{n:"Lunges",s:3,r:12,u:"reps"},{n:"Burpees",s:3,r:10,u:"reps"},{n:"Leg Raises",s:3,r:12,u:"reps"},{n:"Plank",s:3,r:45,u:"sec"}]},{id:"b1",rank:"B",name:"Elite Trial",time:"30 min",xp:200,ex:[{n:"Push-ups",s:4,r:20,u:"reps"},{n:"Diamond Push-ups",s:3,r:12,u:"reps"},{n:"Jump Squats",s:4,r:15,u:"reps"},{n:"Burpees",s:4,r:12,u:"reps"},{n:"Mountain Climbers",s:3,r:30,u:"reps"},{n:"Plank",s:3,r:60,u:"sec"}]},{id:"a1",rank:"A",name:"High Rank Protocol",time:"35 min",xp:280,ex:[{n:"Push-ups",s:5,r:25,u:"reps"},{n:"Pike Push-ups",s:4,r:12,u:"reps"},{n:"Jump Squats",s:4,r:20,u:"reps"},{n:"Burpees",s:4,r:15,u:"reps"},{n:"Lunges",s:3,r:15,u:"reps"},{n:"Plank",s:3,r:75,u:"sec"}]},{id:"s1",rank:"S",name:"Shadow Commander",time:"45 min",xp:450,ex:[{n:"Push-ups",s:5,r:30,u:"reps"},{n:"Diamond Push-ups",s:4,r:15,u:"reps"},{n:"Pike Push-ups",s:4,r:15,u:"reps"},{n:"Jump Squats",s:5,r:25,u:"reps"},{n:"Burpees",s:5,r:18,u:"reps"},{n:"Mountain Climbers",s:4,r:40,u:"reps"},{n:"Plank",s:4,r:90,u:"sec"}]}];
+const BOSSES=[{id:"boss1",name:"Iron Fortress",desc:"High volume strength test.",xp:320,ex:[{n:"Push-ups",s:5,r:20,u:"reps"},{n:"Squats",s:5,r:25,u:"reps"},{n:"Plank",s:4,r:45,u:"sec"},{n:"Burpees",s:4,r:12,u:"reps"}]},{id:"boss2",name:"Shadow Legion",desc:"Endurance gauntlet.",xp:340,ex:[{n:"Jumping Jacks",s:4,r:40,u:"reps"},{n:"Mountain Climbers",s:4,r:30,u:"reps"},{n:"High Knees",s:4,r:40,u:"sec"},{n:"Burpees",s:4,r:15,u:"reps"}]},{id:"boss3",name:"Monarch's Trial",desc:"Full-body raid.",xp:420,ex:[{n:"Push-ups",s:4,r:25,u:"reps"},{n:"Jump Squats",s:4,r:20,u:"reps"},{n:"Diamond Push-ups",s:3,r:12,u:"reps"},{n:"Lunges",s:3,r:15,u:"reps"},{n:"Plank",s:3,r:60,u:"sec"}]}];
+const PROGRAMS=[{id:"p1",name:"Foundation",weeks:2,desc:"Build the basics. 3 sessions/week.",sessions:["e1","e2","d1"]},{id:"p2",name:"Strength Builder",weeks:3,desc:"Push, squat and core focus.",sessions:["d1","d2","c1"]},{id:"p3",name:"Hunter Path",weeks:4,desc:"Progressive challenge.",sessions:["c1","b1","a1"]}];
+
+let S={name:"",level:1,xp:0,totalXP:0,stats:{str:10,end:10,agi:10,vit:10},fit:"beginner",goal:"balanced",weekFocus:"balanced",skills:{pushup:{level:0,practice:0},squat:{level:0,practice:0},core:{level:0,practice:0},pull:{level:0,practice:0}},quests:[],doneToday:[],history:[],streak:0,lastDay:null,workouts:0,questsDone:0,weekly:null,bossCleared:[],prs:{},activity:{},activeProgram:null,lastHardDay:null,created:null};
+let cur=null,pickData={fit:"",goal:""},restSeconds=90,restInterval=null,restRunning=false;
+
+function save(){try{localStorage.setItem("arise_v7",JSON.stringify(S))}catch(e){}}
+function load(){const raw=localStorage.getItem("arise_v7")||localStorage.getItem("arise_v6");if(!raw)return false;try{const d=JSON.parse(raw);S={...S,...d};if(!S.skills)S.skills={pushup:{level:0,practice:0},squat:{level:0,practice:0},core:{level:0,practice:0},pull:{level:0,practice:0}};if(!S.prs)S.prs={};if(!S.activity)S.activity={};if(!S.bossCleared)S.bossCleared=[];return true}catch(e){return false}}
+function xpNeed(lv){return Math.floor(100*Math.pow(1.28,lv-1))}
+function getRank(lv){let r=RANKS[0];for(const x of RANKS)if(lv>=x.min)r=x;return r}
+function today(){return new Date().toISOString().slice(0,10)}
+function weekKey(){const d=new Date(),onejan=new Date(d.getFullYear(),0,1),week=Math.ceil((((d-onejan)/86400000)+onejan.getDay()+1)/7);return d.getFullYear()+"-W"+week}
+function toast(msg){const t=document.getElementById("toast");t.textContent=msg;t.classList.add("show");clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove("show"),2800)}
+function system(msg){document.getElementById("systemMsg").innerHTML=`<strong>[SYSTEM]</strong> ${msg}`}
+
+function pick(btn,key){btn.parentElement.querySelectorAll(".choice").forEach(b=>b.classList.remove("selected"));btn.classList.add("selected");pickData[key]=btn.dataset.v;if(key==="fit")document.getElementById("b2").disabled=false;if(key==="goal")document.getElementById("b3").disabled=false}
+function goStep(n){if(n===2){const name=document.getElementById("nameInput").value.trim();if(!name){toast("Enter a name");return}pickData.name=name}document.querySelectorAll(".step").forEach(s=>s.classList.remove("active"));document.getElementById("s"+n).classList.add("active")}
+function finishOnboard(){S.name=pickData.name;S.fit=pickData.fit;S.goal=pickData.goal;S.created=Date.now();S.lastDay=today();S.streak=1;const base={beginner:8,intermediate:14,advanced:20}[S.fit]||10;S.stats={str:base,end:base,agi:base,vit:base};makeQuests();makeWeekly();save();document.getElementById("onboard").classList.add("hidden");render();system(`Hunter ${S.name} registered.`);toast("System online")}
+
+function makeQuests(){const day=today();if(S.lastDay===day&&S.quests.length)return;if(S.lastDay&&S.lastDay!==day){const y=new Date();y.setDate(y.getDate()-1);const yk=y.toISOString().slice(0,10);if(S.lastDay===yk&&S.doneToday.length)S.streak++;else if(S.lastDay!==yk)S.streak=1;S.doneToday=[]}S.lastDay=day;const r=getRank(S.level).rank,order=["E","D","C","B","A","S"],idx=order.indexOf(r);const pool=WORKOUTS.filter(w=>{const i=order.indexOf(w.rank);return i>=Math.max(0,idx-1)&&i<=Math.min(5,idx+1)});const main=pool[Math.floor(Math.random()*pool.length)]||WORKOUTS[0];let goalQ={strength:{name:"Strength Gate",desc:"40 total push-ups",xp:40},endurance:{name:"Endurance Gate",desc:"3 min cardio moves",xp:40},balanced:{name:"Balanced Hunt",desc:"Finish any ranked workout",xp:35}}[S.goal]||{name:"Daily Duty",desc:"Complete one ranked workout",xp:35};if(S.weekFocus==="skill")goalQ={name:"Skill Practice",desc:"Log practice on any Skill Path",xp:35};S.quests=[{id:"q1",type:"workout",name:main.name,desc:main.time+" · "+main.rank+"-Rank",xp:main.xp,wid:main.id,done:false},{id:"q2",type:"simple",name:goalQ.name,desc:goalQ.desc,xp:goalQ.xp,done:false},{id:"q3",type:"simple",name:"Core Stabilization",desc:"Plank total 90 seconds",xp:30,done:false},{id:"q4",type:"simple",name:"Volume Protocol",desc:"50 squats or 35 push-ups",xp:30,done:false}];save()}
+function completeQuest(id){const q=S.quests.find(x=>x.id===id);if(!q||q.done)return;q.done=true;S.doneToday.push(id);S.questsDone++;addXP(q.xp,q.name);S.stats.vit++;S.stats.end++;save();render();toast(`Quest cleared · +${q.xp} XP`);system(`Quest “${q.name}” completed.`)}
+function makeWeekly(){const wk=weekKey();if(S.weekly&&S.weekly.week===wk)return;S.weekly={week:wk,name:"Weekly Shadow Task",desc:"Complete 4 ranked workouts this week",need:4,progress:0,xp:220,done:false};save()}
+function updateWeekly(){if(!S.weekly||S.weekly.done)return;S.weekly.progress=Math.min(S.weekly.need,(S.weekly.progress||0)+1);if(S.weekly.progress>=S.weekly.need){S.weekly.done=true;addXP(S.weekly.xp,"Weekly Challenge");toast("Weekly Challenge cleared");system("Weekly Shadow Task complete.")}save()}
+function setWeekFocus(f){S.weekFocus=f;save();render();toast("Focus updated")}
+
+function practiceSkill(key){const sk=S.skills[key],def=SKILLS[key];if(sk.level>=def.levels.length-1){toast("Path complete");return}sk.practice++;addXP(15,def.name+" practice");S.stats.str++;if(key==="core")S.stats.vit++;if(key==="pull"||key==="pushup")S.stats.agi++;save();render();toast("Practice logged");if(sk.practice>=def.need)system(`Ready to advance ${def.name}.`);else system(`${def.need-sk.practice} more needed.`)}
+function skillUp(key){const sk=S.skills[key],def=SKILLS[key];if(sk.level>=def.levels.length-1){toast("Max level");return}if(sk.practice<def.need){toast(`Practice ${def.need-sk.practice} more`);return}sk.level++;sk.practice=0;addXP(40,def.name+" advanced");S.stats.str+=2;S.stats.agi++;save();render();toast("Skill advanced");system(`${def.name} advanced.`)}
+
+function openWorkout(id,isBoss){const w=isBoss?BOSSES.find(b=>b.id===id):WORKOUTS.find(x=>x.id===id);if(!w)return;cur=JSON.parse(JSON.stringify(w));cur.isBoss=!!isBoss;cur.ex.forEach(e=>e.logged=0);document.getElementById("mTitle").textContent=w.name;document.getElementById("mSub").textContent=(w.rank?w.rank+"-Rank · ":"Boss · ")+(w.time||"")+" · +"+w.xp+" XP";updateProg();const box=document.getElementById("mEx");box.innerHTML="";cur.ex.forEach((e,i)=>{const div=document.createElement("div");div.className="ex";div.id="ex"+i;div.innerHTML=`<div><div class="ex-name">${e.n}</div><div class="ex-meta">${e.s} sets × ${e.r} ${e.u}</div></div><div class="log"><button onclick="logSet(${i},-1)">−</button><span id="log${i}">0</span><button onclick="logSet(${i},1)">+</button></div>`;box.appendChild(div)});document.getElementById("modal").classList.add("show");showRestTimer();restSeconds=90;updateRestDisplay()}
+function logSet(i,d){if(!cur)return;const e=cur.ex[i];e.logged=Math.max(0,Math.min(e.s,e.logged+d));document.getElementById("log"+i).textContent=e.logged;document.getElementById("ex"+i).classList.toggle("done",e.logged>=e.s);updateProg()}
+function markAll(){if(!cur)return;cur.ex.forEach((e,i)=>{e.logged=e.s;document.getElementById("log"+i).textContent=e.s;document.getElementById("ex"+i).classList.add("done")});updateProg()}
+function updateProg(){if(!cur)return;const tot=cur.ex.reduce((a,e)=>a+e.s,0),log=cur.ex.reduce((a,e)=>a+e.logged,0);document.getElementById("mProg").style.width=(tot?Math.round(log/tot*100):0)+"%"}
+function closeModal(){document.getElementById("modal").classList.remove("show");cur=null}
+function finishWorkout(){if(!cur)return;const tot=cur.ex.reduce((a,e)=>a+e.s,0),log=cur.ex.reduce((a,e)=>a+e.logged,0);if(log<Math.ceil(tot*.4)){toast("Log at least 40% of sets");return}const gain=Math.floor(cur.xp*(log/tot));addXP(gain,cur.name);S.workouts++;S.lastHardDay=today();markActivity();updatePRs(cur);cur.ex.forEach(e=>{const n=e.n.toLowerCase();if(n.includes("push")||n.includes("squat")||n.includes("lunge"))S.stats.str++;if(n.includes("burpee")||n.includes("jump")||n.includes("mountain")||n.includes("high"))S.stats.end++;if(n.includes("plank")||n.includes("crunch")||n.includes("leg")||n.includes("twist"))S.stats.vit++});Object.keys(S.stats).forEach(k=>S.stats[k]=Math.min(999,S.stats[k]));const match=S.quests.find(q=>q.wid===cur.id&&!q.done);if(match){match.done=true;S.doneToday.push(match.id);S.questsDone++}if(cur.isBoss){if(!S.bossCleared.includes(cur.id))S.bossCleared.push(cur.id);system(`Boss “${cur.name}” cleared.`)}else updateWeekly();save();closeModal();render();toast(`+${gain} XP`)}
+
+function addXP(amount,source){S.xp+=amount;S.totalXP+=amount;S.history.unshift({t:new Date().toLocaleString(),s:source,x:amount});if(S.history.length>40)S.history.pop();let up=false;const oldRank=getRank(S.level).rank;while(S.xp>=xpNeed(S.level)){S.xp-=xpNeed(S.level);S.level++;up=true;S.stats.str+=2;S.stats.end+=2;S.stats.agi+=2;S.stats.vit+=2}save();if(up){const r=getRank(S.level);document.getElementById("levelupText").textContent=`Level ${S.level} · ${r.title}`;document.getElementById("levelup").classList.add("show");system(r.msg+` You are now ${r.title}.`);if(r.rank!==oldRank)setTimeout(()=>toast(`Rank up · ${r.rank}-Rank`),400)}}
+function closeLevelup(){document.getElementById("levelup").classList.remove("show");render()}
+
+function showRestTimer(){const el=document.getElementById("restTimer");if(el)el.style.display="block";updateRestDisplay()}
+function updateRestDisplay(){const m=Math.floor(restSeconds/60).toString().padStart(2,"0"),s=(restSeconds%60).toString().padStart(2,"0");const el=document.getElementById("restTime");if(el)el.textContent=m+":"+s}
+function adjustRest(d){restSeconds=Math.max(15,Math.min(300,restSeconds+d));if(!restRunning)updateRestDisplay()}
+function toggleRest(){if(restRunning){clearInterval(restInterval);restRunning=false;const btn=document.querySelector("#restTimer .btn-primary");if(btn)btn.textContent="Start"}else{restRunning=true;const btn=document.querySelector("#restTimer .btn-primary");if(btn)btn.textContent="Pause";restInterval=setInterval(()=>{restSeconds--;updateRestDisplay();if(restSeconds<=0){clearInterval(restInterval);restRunning=false;restSeconds=90;updateRestDisplay();if(btn)btn.textContent="Start";toast("Rest complete");if(navigator.vibrate)navigator.vibrate(200)}},1000)}}
+
+function updatePRs(workout){if(!S.prs)S.prs={};workout.ex.forEach(e=>{const key=e.n.toLowerCase(),volume=e.logged*(e.r||1);if(!S.prs[key]||volume>S.prs[key].volume)S.prs[key]={name:e.n,sets:e.logged,reps:e.r,volume,date:today()}})}
+function renderPRs(){const el=document.getElementById("prList");if(!el)return;if(!S.prs||!Object.keys(S.prs).length){el.innerHTML='<div class="empty">Complete workouts to set records</div>';return}const sorted=Object.values(S.prs).sort((a,b)=>b.volume-a.volume).slice(0,8);el.innerHTML=sorted.map(p=>`<div class="pr-row"><div class="pr-name">${p.name}</div><div class="pr-value">${p.sets}×${p.reps}</div></div>`).join("")}
+function renderCalendar(){const el=document.getElementById("calGrid");if(!el)return;if(!S.activity)S.activity={};const days=[];for(let i=27;i>=0;i--){const d=new Date();d.setDate(d.getDate()-i);days.push(d.toISOString().slice(0,10))}const todayKey=today();el.innerHTML=days.map(key=>{const active=S.activity[key]?"active":"",isToday=key===todayKey?"today":"";return `<div class="cal-day ${active} ${isToday}">${parseInt(key.slice(8),10)}</div>`}).join("")}
+function markActivity(){if(!S.activity)S.activity={};S.activity[today()]=true;const keys=Object.keys(S.activity).sort();if(keys.length>60)keys.slice(0,keys.length-60).forEach(k=>delete S.activity[k])}
+function renderPrograms(){const el=document.getElementById("programList");if(!el)return;el.innerHTML=PROGRAMS.map(p=>{const active=S.activeProgram===p.id;return `<div class="item ${active?"done":""}"><div class="item-row"><div class="item-name">${p.name}</div><div class="item-xp">${p.weeks} weeks</div></div><div class="item-desc">${p.desc}</div><button class="${active?"btn-secondary":"btn-primary"}" onclick="startProgram('${p.id}')">${active?"Active":"Start Program"}</button></div>`}).join("")}
+function startProgram(id){S.activeProgram=id;save();renderPrograms();toast("Program started")}
+
+function render(){const r=getRank(S.level);document.getElementById("levelNum").textContent=S.level;document.getElementById("xpText").textContent=`${S.xp} / ${xpNeed(S.level)} XP`;document.getElementById("xpFill").style.width=Math.min(100,S.xp/xpNeed(S.level)*100)+"%";const pill=document.getElementById("rankPill");pill.textContent=r.rank+"-RANK";pill.className="rank-pill rank-"+r.rank;
+const doneQ=S.quests.filter(q=>q.done).length;let focus="Complete your Daily Quests";if(doneQ===0)focus="Start with your main ranked workout";else if(doneQ<S.quests.length)focus="Finish remaining Daily Quests";else if(S.weekly&&!S.weekly.done)focus="Push the Weekly Challenge";else focus="Practice a Skill Path or try a Boss Raid";document.getElementById("focusText").textContent=focus;
+const recoverBox=document.getElementById("recoverBox");if(S.lastHardDay===today()&&S.workouts>0){recoverBox.style.display="block";document.getElementById("recoverText").textContent="You already trained hard today. Sleep and easy movement help growth."}else if(S.streak>=5&&doneQ===0){recoverBox.style.display="block";document.getElementById("recoverText").textContent="Long streak. Listening to your body is part of getting stronger."}else recoverBox.style.display="none";
+document.getElementById("questCount").textContent=doneQ+"/"+S.quests.length;const ql=document.getElementById("questList");ql.innerHTML="";S.quests.forEach(q=>{const d=document.createElement("div");d.className="item"+(q.done?" done":"");d.innerHTML=`<div class="item-row"><div class="item-name">${q.name}</div><div class="item-xp">+${q.xp} XP</div></div><div class="item-desc">${q.desc}</div><div class="item-actions">${q.done?`<button class="btn-secondary" disabled>Done</button>`:q.type==="workout"?`<button class="btn-primary" onclick="openWorkout('${q.wid}')">Start</button><button class="btn-secondary" onclick="completeQuest('${q.id}')">Mark Done</button>`:`<button class="btn-primary" onclick="completeQuest('${q.id}')">Complete</button>`}</div>`;ql.appendChild(d)});
+const wb=document.getElementById("weeklyBox");if(S.weekly)wb.innerHTML=`<div class="item ${S.weekly.done?"done":""}"><div class="item-row"><div class="item-name">${S.weekly.name}</div><div class="item-xp">+${S.weekly.xp} XP</div></div><div class="item-desc">${S.weekly.desc}</div><div style="font-size:.8rem;color:var(--muted)">Progress: ${S.weekly.progress||0} / ${S.weekly.need}</div></div>`;else wb.innerHTML="<div class='empty'>No weekly challenge yet</div>";
+const st=id=>{document.getElementById(id).innerHTML=`<div class="stat"><div class="stat-label">Strength</div><div class="stat-value">${S.stats.str}</div></div><div class="stat"><div class="stat-label">Endurance</div><div class="stat-value">${S.stats.end}</div></div><div class="stat"><div class="stat-label">Agility</div><div class="stat-value">${S.stats.agi}</div></div><div class="stat"><div class="stat-label">Vitality</div><div class="stat-value">${S.stats.vit}</div></div>`};st("quickStats");st("fullStats");
+document.getElementById("lifeStats").innerHTML=`<div class="stat"><div class="stat-label">Total XP</div><div class="stat-value">${S.totalXP}</div></div><div class="stat"><div class="stat-label">Workouts</div><div class="stat-value">${S.workouts}</div></div><div class="stat"><div class="stat-label">Quests</div><div class="stat-value">${S.questsDone}</div></div><div class="stat"><div class="stat-label">Streak</div><div class="stat-value">${S.streak}</div></div>`;
+document.querySelectorAll(".chip").forEach(c=>c.classList.toggle("active",c.dataset.f===S.weekFocus));
+const sl=document.getElementById("skillList");sl.innerHTML="";Object.keys(SKILLS).forEach(key=>{const def=SKILLS[key],sk=S.skills[key]||{level:0,practice:0},curL=def.levels[sk.level],next=def.levels[sk.level+1],canAdvance=sk.practice>=def.need&&next;let ladder="";def.levels.forEach((lv,i)=>{let cls="ladder-step";if(i<sk.level)cls+=" done";if(i===sk.level)cls+=" current";ladder+=`<div class="${cls}"><div class="ladder-dot"></div><span>${lv.name}</span></div>`});const div=document.createElement("div");div.className="skill";div.innerHTML=`<div class="skill-top"><div class="skill-name">${def.name}</div><div class="skill-stage">Stage ${sk.level+1}/${def.levels.length}</div></div><div class="ladder">${ladder}</div><div class="skill-tip"><strong>Form</strong> · ${curL.tip}<span class="skill-mistake">${curL.mistake}</span></div><div class="skill-progress">Practice <strong>${sk.practice}</strong> / ${def.need}${canAdvance?" · Ready":""}</div><div style="display:flex;gap:8px"><button class="btn-secondary" style="flex:1" onclick="practiceSkill('${key}')">Log Practice</button>${next?`<button class="btn-primary" style="flex:1" ${canAdvance?"":"disabled"} onclick="skillUp('${key}')">Advance</button>`:""}</div>`;sl.appendChild(div)});
+const wl=document.getElementById("workoutList");wl.innerHTML="";WORKOUTS.forEach(w=>{const d=document.createElement("div");d.className="item";d.innerHTML=`<div class="item-row"><div class="item-name">${w.name} <span style="font-size:.7rem;color:var(--faint)">${w.rank}</span></div><div class="item-xp">+${w.xp}</div></div><div class="item-desc">${w.time} · ${w.ex.length} exercises</div><button class="btn-primary" onclick="openWorkout('${w.id}')">Start</button>`;wl.appendChild(d)});
+document.getElementById("weeklyChallenge").innerHTML=S.weekly?`<div class="item ${S.weekly.done?"done":""}"><div class="item-row"><div class="item-name">${S.weekly.name}</div><div class="item-xp">+${S.weekly.xp} XP</div></div><div class="item-desc">${S.weekly.desc}</div><div style="margin-top:4px;font-size:.85rem;color:var(--muted)">Progress: ${S.weekly.progress||0} / ${S.weekly.need}</div></div>`:"<div class='empty'>Loading…</div>";
+const br=document.getElementById("bossRaid");br.innerHTML="";BOSSES.forEach(b=>{const cleared=S.bossCleared.includes(b.id);const d=document.createElement("div");d.className="item boss";d.innerHTML=`<div class="item-row"><div class="item-name">${b.name}${cleared?' <span class="badge">CLEARED</span>':''}</div><div class="item-xp">+${b.xp}</div></div><div class="item-desc">${b.desc}</div><button class="btn-gold" onclick="openWorkout('${b.id}',true)">${cleared?"Raid Again":"Enter Raid"}</button>`;br.appendChild(d)});
+document.getElementById("hunterName").textContent=S.name;document.getElementById("profileLevel").textContent=S.level;document.getElementById("streakNum").textContent=S.streak;const pr=document.getElementById("profileRank");pr.textContent=r.rank+"-RANK";pr.className="rank-pill rank-"+r.rank;document.getElementById("rankTitle").textContent=r.title;
+renderPRs();renderCalendar();renderPrograms()}
+
+document.querySelectorAll(".nav-btn").forEach(btn=>{btn.addEventListener("click",()=>{document.querySelectorAll(".nav-btn").forEach(b=>b.classList.remove("active"));document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));btn.classList.add("active");document.getElementById("screen-"+btn.dataset.s).classList.add("active")})});
+function refreshQuests(){S.quests=[];S.doneToday=[];makeQuests();render();toast("Quests refreshed")}
+function exportSave(){const blob=new Blob([JSON.stringify(S,null,2)],{type:"application/json"});const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="arise-"+(S.name||"hunter")+".json";a.click();toast("Exported")}
+function resetAll(){if(confirm("Delete all progress?")){localStorage.removeItem("arise_v7");localStorage.removeItem("arise_v6");location.reload()}}
+function init(){if(load()){makeQuests();makeWeekly();document.getElementById("onboard").classList.add("hidden");render();system(`Welcome back, ${S.name}. Rank: ${getRank(S.level).title}.`)}}init();
+</script>
 </body>
 </html>
