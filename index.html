@@ -6,26 +6,13 @@
 <meta name="theme-color" content="#000000">
 <title>ARISE</title>
 <style>
-:root{
-  --bg:#000;
-  --surface:#0a0a0a;
-  --card:#111;
-  --border:#222;
-  --border-soft:#1a1a1a;
-  --text:#f5f5f5;
-  --muted:#888;
-  --faint:#555;
-  --accent:#fff;
-  --accent-soft:rgba(255,255,255,.08);
-  --radius:14px;
-  --radius-sm:10px;
-}
+:root{--bg:#000;--surface:#0a0a0a;--card:#111;--border:#222;--border-soft:#1a1a1a;--text:#f5f5f5;--muted:#888;--faint:#555;--accent:#fff;--accent-soft:rgba(255,255,255,.08);--radius:14px;--radius-sm:10px}
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100dvh;line-height:1.5;-webkit-font-smoothing:antialiased;font-size:15px}
 .app{max-width:420px;margin:0 auto;min-height:100dvh;padding-bottom:calc(78px + env(safe-area-inset-bottom));position:relative}
 header{position:sticky;top:0;z-index:40;padding:16px 20px 14px;background:rgba(0,0,0,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border-soft)}
 .header-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
-.logo{font-size:1.15rem;font-weight:700;letter-spacing:3px;color:var(--text)}
+.logo{font-size:1.15rem;font-weight:700;letter-spacing:3px}
 .rank-pill{font-size:.65rem;font-weight:600;letter-spacing:.8px;padding:5px 11px;border-radius:100px;border:1px solid #444;color:#ccc;background:#111;text-transform:uppercase}
 .xp-meta{display:flex;justify-content:space-between;font-size:.75rem;color:var(--muted);margin-bottom:6px}
 .xp-track{height:6px;background:var(--card);border-radius:100px;overflow:hidden}
@@ -38,13 +25,13 @@ main{padding:16px 16px 24px}
 .system strong{color:#fff;font-weight:600}
 .focus{background:var(--surface);border:1px solid var(--border-soft);border-radius:var(--radius);padding:14px 16px;margin-bottom:12px}
 .focus-label{font-size:.65rem;font-weight:600;letter-spacing:.8px;text-transform:uppercase;color:var(--faint);margin-bottom:4px}
-.focus-text{font-size:.95rem;font-weight:600;color:var(--text)}
+.focus-text{font-size:.95rem;font-weight:600}
 .recover{background:rgba(255,255,255,.04);border:1px solid #333;border-radius:var(--radius);padding:12px 14px;margin-bottom:12px;font-size:.85rem;color:var(--muted);line-height:1.4}
-.recover strong{color:#fff;font-weight:600}
+.recover strong{color:#fff}
 .item{background:var(--card);border:1px solid var(--border-soft);border-radius:var(--radius-sm);padding:14px;margin-bottom:8px}
 .item.done{border-color:#555;background:rgba(255,255,255,.04)}
 .item-row{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:4px}
-.item-name{font-weight:600;font-size:.95rem;color:var(--text)}
+.item-name{font-weight:600;font-size:.95rem}
 .item-xp{font-size:.7rem;font-weight:600;color:#fff;background:rgba(255,255,255,.1);padding:3px 9px;border-radius:100px;white-space:nowrap}
 .item-desc{font-size:.82rem;color:var(--muted);margin-bottom:12px;line-height:1.4}
 .item-actions{display:flex;gap:8px;flex-wrap:wrap}
@@ -58,7 +45,7 @@ button:active{transform:scale(.98)}button:disabled{opacity:.35;cursor:not-allowe
 .stats{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .stat{background:var(--card);border-radius:var(--radius-sm);padding:12px 10px;text-align:center;border:1px solid var(--border-soft)}
 .stat-label{font-size:.65rem;color:var(--faint);text-transform:uppercase;letter-spacing:.6px;margin-bottom:2px}
-.stat-value{font-size:1.25rem;font-weight:700;color:var(--text)}
+.stat-value{font-size:1.25rem;font-weight:700}
 .skill{background:var(--card);border:1px solid var(--border-soft);border-radius:var(--radius-sm);padding:14px;margin-bottom:10px}
 .skill-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
 .skill-name{font-weight:600;font-size:.95rem}
@@ -68,10 +55,10 @@ button:active{transform:scale(.98)}button:disabled{opacity:.35;cursor:not-allowe
 .ladder-step.done{color:var(--muted)}
 .ladder-step.current{background:rgba(255,255,255,.08);color:var(--text);font-weight:500}
 .ladder-dot{width:7px;height:7px;border-radius:50%;background:#333;flex-shrink:0}
-.ladder-step.done .ladder-dot{background:#fff}
-.ladder-step.current .ladder-dot{background:#fff;box-shadow:0 0 0 3px rgba(255,255,255,.15)}
+.ladder-step.done .ladder-dot,.ladder-step.current .ladder-dot{background:#fff}
+.ladder-step.current .ladder-dot{box-shadow:0 0 0 3px rgba(255,255,255,.15)}
 .skill-tip{font-size:.8rem;color:var(--muted);background:rgba(255,255,255,.03);border-radius:8px;padding:10px 12px;margin-bottom:10px;line-height:1.45}
-.skill-tip strong{color:var(--text);font-weight:600}
+.skill-tip strong{color:var(--text)}
 .skill-mistake{display:block;margin-top:6px;color:#aaa;font-size:.76rem}
 .skill-progress{font-size:.78rem;color:var(--muted);margin-bottom:10px}
 .skill-progress strong{color:var(--text)}
@@ -85,18 +72,23 @@ nav{position:fixed;bottom:0;left:0;right:0;max-width:420px;margin:0 auto;backgro
 .screen{display:none}
 .screen.active{display:block;animation:in .22s ease}
 @keyframes in{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
-.onboard{position:fixed;inset:0;background:var(--bg);z-index:100;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:28px 22px;overflow-y:auto}
+.onboard{position:fixed;inset:0;background:var(--bg);z-index:100;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding:24px 20px 40px;overflow-y:auto}
 .onboard.hidden{display:none}
-.onboard-logo{font-size:1.8rem;font-weight:800;letter-spacing:4px;margin-bottom:8px;color:var(--text)}
-.onboard-sub{color:var(--muted);text-align:center;margin-bottom:32px;font-size:.95rem}
+.onboard-logo{font-size:1.6rem;font-weight:800;letter-spacing:4px;margin:12px 0 4px;color:var(--text)}
+.onboard-sub{color:var(--muted);text-align:center;margin-bottom:20px;font-size:.88rem}
+.ob-progress{width:100%;max-width:320px;height:4px;background:#222;border-radius:100px;margin-bottom:20px;overflow:hidden}
+.ob-progress>div{height:100%;background:#fff;transition:width .3s}
 .step{width:100%;max-width:320px;display:none}
 .step.active{display:block;animation:in .25s ease}
-.step h2{font-size:1.25rem;font-weight:700;text-align:center;margin-bottom:6px}
-.step p{text-align:center;color:var(--muted);font-size:.9rem;margin-bottom:22px}
-.choice{display:block;width:100%;text-align:left;background:var(--surface);border:1.5px solid #333;border-radius:12px;padding:15px 16px;margin-bottom:8px;color:var(--text);font-size:.95rem;font-weight:500}
+.step h2{font-size:1.2rem;font-weight:700;text-align:center;margin-bottom:6px}
+.step p{text-align:center;color:var(--muted);font-size:.88rem;margin-bottom:18px}
+.choice{display:block;width:100%;text-align:left;background:var(--surface);border:1.5px solid #333;border-radius:12px;padding:14px 16px;margin-bottom:8px;color:var(--text);font-size:.92rem;font-weight:500}
 .choice.selected{border-color:#fff;background:rgba(255,255,255,.08)}
-input[type=text]{width:100%;background:var(--surface);border:1.5px solid #333;border-radius:12px;padding:14px 16px;color:var(--text);font-size:1rem;margin-bottom:18px;outline:none;font-family:inherit}
+.choice.multi.selected{border-color:#fff;background:rgba(255,255,255,.08)}
+input[type=text]{width:100%;background:var(--surface);border:1.5px solid #333;border-radius:12px;padding:14px 16px;color:var(--text);font-size:1rem;margin-bottom:16px;outline:none;font-family:inherit}
 input[type=text]:focus{border-color:#fff}
+.ob-nav{display:flex;gap:10px;margin-top:18px}
+.ob-nav button{flex:1}
 .modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:80;display:none;align-items:center;justify-content:center;padding:18px}
 .modal-bg.show{display:flex}
 .modal{background:var(--surface);border:1px solid #333;border-radius:18px;padding:20px;width:100%;max-width:360px;max-height:85dvh;overflow-y:auto}
@@ -113,22 +105,21 @@ input[type=text]:focus{border-color:#fff}
 .log span{min-width:22px;text-align:center;font-weight:700;font-size:.9rem}
 .levelup{position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:120;display:none;flex-direction:column;align-items:center;justify-content:center}
 .levelup.show{display:flex}
-.levelup h1{font-size:2rem;font-weight:800;letter-spacing:1px;color:#fff}
+.levelup h1{font-size:2rem;font-weight:800;letter-spacing:1px}
 .levelup p{margin-top:10px;font-size:1.05rem;color:var(--muted)}
-.toast{position:fixed;top:72px;left:50%;transform:translateX(-50%) translateY(-8px);background:#111;border:1px solid #333;border-radius:12px;padding:11px 18px;font-size:.88rem;z-index:110;opacity:0;transition:all .25s ease;pointer-events:none;max-width:88%;text-align:center;box-shadow:0 8px 30px rgba(0,0,0,.5)}
+.toast{position:fixed;top:72px;left:50%;transform:translateX(-50%) translateY(-8px);background:#111;border:1px solid #333;border-radius:12px;padding:11px 18px;font-size:.88rem;z-index:110;opacity:0;transition:all .25s ease;pointer-events:none;max-width:88%;text-align:center}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 .rank-title{font-size:.8rem;color:var(--muted);margin-top:6px}
 .boss{border-color:#444;background:rgba(255,255,255,.03)}
-.badge{font-size:.62rem;font-weight:700;padding:2px 7px;border-radius:6px;background:rgba(255,255,255,.12);color:#fff;margin-left:6px;vertical-align:middle}
+.badge{font-size:.62rem;font-weight:700;padding:2px 7px;border-radius:6px;background:rgba(255,255,255,.12);color:#fff;margin-left:6px}
 .empty{text-align:center;padding:20px 12px;color:var(--faint);font-size:.9rem}
 .note{font-size:.82rem;color:var(--muted);background:rgba(255,255,255,.03);border-radius:10px;padding:11px 13px;margin-bottom:14px;line-height:1.45}
 .rest-timer{background:rgba(255,255,255,.05);border:1px solid #333;border-radius:12px;padding:14px;margin-bottom:14px;text-align:center}
 .rest-timer-label{font-size:.7rem;font-weight:600;letter-spacing:.8px;text-transform:uppercase;color:var(--faint);margin-bottom:4px}
-.rest-timer-time{font-size:2.2rem;font-weight:700;font-variant-numeric:tabular-nums;color:#fff;letter-spacing:1px}
+.rest-timer-time{font-size:2.2rem;font-weight:700;font-variant-numeric:tabular-nums;letter-spacing:1px}
 .rest-timer-actions{display:flex;gap:8px;justify-content:center;margin-top:10px}
 .pr-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--border-soft);font-size:.88rem}
 .pr-row:last-child{border-bottom:none}
-.pr-name{font-weight:500}
 .pr-value{color:#fff;font-weight:600}
 .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-top:8px}
 .cal-day{aspect-ratio:1;border-radius:8px;background:var(--card);display:flex;align-items:center;justify-content:center;font-size:.7rem;color:var(--faint)}
@@ -154,7 +145,6 @@ input[type=text]:focus{border-color:#fff}
 <main>
 <div class="screen active" id="screen-home">
 <div class="system" id="systemMsg"><strong>[SYSTEM]</strong> Welcome. Complete your Daily Quests.</div>
-
 <div class="shadow-panel" id="shadowPanel">
 <div class="shadow-icon">👤</div>
 <div class="shadow-name" id="shadowName">Your Shadow</div>
@@ -165,16 +155,13 @@ input[type=text]:focus{border-color:#fff}
 </div>
 <div style="margin-top:12px" id="missionControls">
 <button class="btn-primary btn-full" onclick="startMission()">↗ Send Mission</button>
-</div>
-</div>
-
+</div></div>
 <div class="focus"><div class="focus-label">◎ Today</div><div class="focus-text" id="focusText">Complete your Daily Quests</div></div>
 <div class="recover" id="recoverBox" style="display:none"><strong>↻ Recovery · </strong><span id="recoverText"></span></div>
 <div class="block"><div class="block-label">⚔ Daily Quests <span id="questCount">0/0</span></div><div id="questList"></div></div>
 <div class="block"><div class="block-label">📅 This Week</div><div id="weeklyBox"></div></div>
 <div class="block"><div class="block-label">◆ Attributes</div><div class="stats" id="quickStats"></div></div>
 </div>
-
 <div class="screen" id="screen-train">
 <div class="block"><div class="block-label">◎ Weekly Focus</div><div class="note">Choose what to emphasize this week.</div><div class="chips" id="weekFocus">
 <button class="chip" data-f="strength" onclick="setWeekFocus('strength')">💪 Strength</button>
@@ -186,12 +173,10 @@ input[type=text]:focus{border-color:#fff}
 <div class="block"><div class="block-label">↗ Skill Paths</div><div class="note">Practice a few times, then Advance.</div><div id="skillList"></div></div>
 <div class="block"><div class="block-label">🏋 Ranked Workouts</div><div id="workoutList"></div></div>
 </div>
-
 <div class="screen" id="screen-boss">
 <div class="block"><div class="block-label">📅 Weekly Challenge</div><div id="weeklyChallenge"></div></div>
 <div class="block"><div class="block-label">🐉 Boss Raids</div><div class="note">Harder challenges for bigger rewards.</div><div id="bossRaid"></div></div>
 </div>
-
 <div class="screen" id="screen-profile">
 <div class="block" style="text-align:center;padding-top:22px;padding-bottom:22px">
 <div style="font-size:1.5rem;font-weight:700;margin-bottom:6px" id="hunterName">Hunter</div>
@@ -207,8 +192,7 @@ input[type=text]:focus{border-color:#fff}
 <button class="btn-secondary btn-full" style="margin-bottom:8px" onclick="refreshQuests()">↻ Refresh Quests</button>
 <button class="btn-secondary btn-full" style="margin-bottom:8px" onclick="exportSave()">↓ Export</button>
 <button class="btn-secondary btn-full" style="color:#aaa;border-color:#444" onclick="resetAll()">✕ Reset</button>
-</div>
-</div>
+</div></div>
 </main>
 <nav>
 <button class="nav-btn active" data-s="home"><span class="nav-icon">⚔</span>Quests</button>
@@ -218,22 +202,117 @@ input[type=text]:focus{border-color:#fff}
 </nav>
 </div>
 
+<!-- FULL 13-STEP ONBOARDING -->
 <div class="onboard" id="onboard">
 <div class="onboard-logo">ARISE</div>
-<div class="onboard-sub">The System has found you.<br>Ready to level up?</div>
-<div class="step active" id="s1"><h2>Hunter Name</h2><p>What should The System call you?</p>
+<div class="onboard-sub">The System is preparing your path</div>
+<div class="ob-progress"><div id="obBar" style="width:7%"></div></div>
+
+<div class="step active" id="s1">
+<h2>Hunter Name</h2><p>What should The System call you?</p>
 <input type="text" id="nameInput" placeholder="Your name" maxlength="16" autocomplete="off">
-<button class="btn-primary btn-full" onclick="goStep(2)">Continue</button></div>
-<div class="step" id="s2"><h2>Your Level</h2><p>Be honest so The System can help you.</p>
-<button class="choice" data-v="beginner" onclick="pick(this,'fit')">Just starting</button>
-<button class="choice" data-v="intermediate" onclick="pick(this,'fit')">Train regularly</button>
-<button class="choice" data-v="advanced" onclick="pick(this,'fit')">Very experienced</button>
-<button class="btn-primary btn-full" id="b2" disabled onclick="goStep(3)" style="margin-top:14px">Continue</button></div>
-<div class="step" id="s3"><h2>Main Goal</h2><p>What do you want most right now?</p>
-<button class="choice" data-v="strength" onclick="pick(this,'goal')">Get stronger</button>
-<button class="choice" data-v="endurance" onclick="pick(this,'goal')">More endurance</button>
-<button class="choice" data-v="balanced" onclick="pick(this,'goal')">All-around fit</button>
-<button class="btn-primary btn-full" id="b3" disabled onclick="finishOnboard()" style="margin-top:14px">Awaken</button></div>
+<button class="btn-primary btn-full" onclick="go(2)">Continue</button>
+</div>
+
+<div class="step" id="s2">
+<h2>Main Goal</h2><p>What do you want most right now?</p>
+<button class="choice" data-k="goal" data-v="strength" onclick="sel(this)">💪 Get stronger</button>
+<button class="choice" data-k="goal" data-v="endurance" onclick="sel(this)">🏃 More endurance</button>
+<button class="choice" data-k="goal" data-v="skill" onclick="sel(this)">✦ Build skills</button>
+<button class="choice" data-k="goal" data-v="balanced" onclick="sel(this)">◎ All-around fit</button>
+<div class="ob-nav"><button class="btn-secondary" onclick="go(1)">Back</button><button class="btn-primary" id="n2" disabled onclick="go(3)">Next</button></div>
+</div>
+
+<div class="step" id="s3">
+<h2>Experience</h2><p>How much have you trained before?</p>
+<button class="choice" data-k="fit" data-v="beginner" onclick="sel(this)">Just starting</button>
+<button class="choice" data-k="fit" data-v="intermediate" onclick="sel(this)">Train regularly</button>
+<button class="choice" data-k="fit" data-v="advanced" onclick="sel(this)">Very experienced</button>
+<div class="ob-nav"><button class="btn-secondary" onclick="go(2)">Back</button><button class="btn-primary" id="n3" disabled onclick="go(4)">Next</button></div>
+</div>
+
+<div class="step" id="s4">
+<h2>Activity Level</h2><p>In a normal week, how active are you?</p>
+<button class="choice" data-k="activity" data-v="low" onclick="sel(this)">Mostly sitting</button>
+<button class="choice" data-k="activity" data-v="light" onclick="sel(this)">Lightly active</button>
+<button class="choice" data-k="activity" data-v="active" onclick="sel(this)">Active most days</button>
+<button class="choice" data-k="activity" data-v="high" onclick="sel(this)">Very active</button>
+<div class="ob-nav"><button class="btn-secondary" onclick="go(3)">Back</button><button class="btn-primary" id="n4" disabled onclick="go(5)">Next</button></div>
+</div>
+
+<div class="step" id="s5">
+<h2>Equipment</h2><p>What do you have access to?</p>
+<button class="choice" data-k="equip" data-v="bodyweight" onclick="sel(this)">Bodyweight only</button>
+<button class="choice" data-k="equip" data-v="basic" onclick="sel(this)">Basic (bands / dumbbells)</button>
+<button class="choice" data-k="equip" data-v="gym" onclick="sel(this)">Full gym</button>
+<div class="ob-nav"><button class="btn-secondary" onclick="go(4)">Back</button><button class="btn-primary" id="n5" disabled onclick="go(6)">Next</button></div>
+</div>
+
+<div class="step" id="s6">
+<h2>Location</h2><p>Where will you usually train?</p>
+<button class="choice" data-k="location" data-v="home" onclick="sel(this)">Home</button>
+<button class="choice" data-k="location" data-v="outdoor" onclick="sel(this)">Outdoor</button>
+<button class="choice" data-k="location" data-v="gym" onclick="sel(this)">Gym</button>
+<div class="ob-nav"><button class="btn-secondary" onclick="go(5)">Back</button><button class="btn-primary" id="n6" disabled onclick="go(7)">Next</button></div>
+</div>
+
+<div class="step" id="s7">
+<h2>Duration</h2><p>How long do you prefer each session?</p>
+<button class="choice" data-k="duration" data-v="15" onclick="sel(this)">~15 minutes</button>
+<button class="choice" data-k="duration" data-v="30" onclick="sel(this)">20–30 minutes</button>
+<button class="choice" data-k="duration" data-v="45" onclick="sel(this)">45+ minutes</button>
+<div class="ob-nav"><button class="btn-secondary" onclick="go(6)">Back</button><button class="btn-primary" id="n7" disabled onclick="go(8)">Next</button></div>
+</div>
+
+<div class="step" id="s8">
+<h2>Preferred Days</h2><p>How many days per week can you train?</p>
+<button class="choice" data-k="days" data-v="2" onclick="sel(this)">2–3 days</button>
+<button class="choice" data-k="days" data-v="4" onclick="sel(this)">4–5 days</button>
+<button class="choice" data-k="days" data-v="6" onclick="sel(this)">6–7 days</button>
+<div class="ob-nav"><button class="btn-secondary" onclick="go(7)">Back</button><button class="btn-primary" id="n8" disabled onclick="go(9)">Next</button></div>
+</div>
+
+<div class="step" id="s9">
+<h2>Focus Areas</h2><p>What do you want to improve? (pick one or more)</p>
+<button class="choice multi" data-k="areas" data-v="upper" onclick="selMulti(this)">Upper body</button>
+<button class="choice multi" data-k="areas" data-v="lower" onclick="selMulti(this)">Lower body</button>
+<button class="choice multi" data-k="areas" data-v="core" onclick="selMulti(this)">Core</button>
+<button class="choice multi" data-k="areas" data-v="full" onclick="selMulti(this)">Full body</button>
+<div class="ob-nav"><button class="btn-secondary" onclick="go(8)">Back</button><button class="btn-primary" id="n9" disabled onclick="go(10)">Next</button></div>
+</div>
+
+<div class="step" id="s10">
+<h2>Strength Check</h2><p>Which feels closest to true right now?</p>
+<button class="choice" data-k="strength" data-v="1" onclick="sel(this)">Push-ups / squats are hard</button>
+<button class="choice" data-k="strength" data-v="2" onclick="sel(this)">I can do a solid set of each</button>
+<button class="choice" data-k="strength" data-v="3" onclick="sel(this)">I handle higher volume easily</button>
+<div class="ob-nav"><button class="btn-secondary" onclick="go(9)">Back</button><button class="btn-primary" id="n10" disabled onclick="go(11)">Next</button></div>
+</div>
+
+<div class="step" id="s11">
+<h2>Mobility Check</h2><p>How do movement and flexibility feel?</p>
+<button class="choice" data-k="mobility" data-v="1" onclick="sel(this)">Stiff / limited range</button>
+<button class="choice" data-k="mobility" data-v="2" onclick="sel(this)">Average / decent</button>
+<button class="choice" data-k="mobility" data-v="3" onclick="sel(this)">Flexible / moves well</button>
+<div class="ob-nav"><button class="btn-secondary" onclick="go(10)">Back</button><button class="btn-primary" id="n11" disabled onclick="go(12)">Next</button></div>
+</div>
+
+<div class="step" id="s12">
+<h2>Cardio Check</h2><p>How is your endurance right now?</p>
+<button class="choice" data-k="cardio" data-v="1" onclick="sel(this)">Get tired quickly</button>
+<button class="choice" data-k="cardio" data-v="2" onclick="sel(this)">Can keep going moderately</button>
+<button class="choice" data-k="cardio" data-v="3" onclick="sel(this)">Good stamina</button>
+<div class="ob-nav"><button class="btn-secondary" onclick="go(11)">Back</button><button class="btn-primary" id="n12" disabled onclick="go(13)">Next</button></div>
+</div>
+
+<div class="step" id="s13">
+<h2>Motivation</h2><p>What keeps you going?</p>
+<button class="choice" data-k="motive" data-v="discipline" onclick="sel(this)">Building discipline</button>
+<button class="choice" data-k="motive" data-v="energy" onclick="sel(this)">More energy</button>
+<button class="choice" data-k="motive" data-v="skill" onclick="sel(this)">Getting better at skills</button>
+<button class="choice" data-k="motive" data-v="fun" onclick="sel(this)">It feels good / fun</button>
+<div class="ob-nav"><button class="btn-secondary" onclick="go(12)">Back</button><button class="btn-primary" id="n13" disabled onclick="finishOnboard()">Awaken</button></div>
+</div>
 </div>
 
 <div class="modal-bg" id="modal">
@@ -264,6 +343,7 @@ input[type=text]:focus{border-color:#fff}
 <div class="toast" id="toast"></div>
 
 <script>
+const TOTAL_STEPS=13;
 const RANKS=[{rank:"E",min:1,title:"Novice Hunter",msg:"You have taken the first step."},{rank:"D",min:5,title:"Apprentice Hunter",msg:"Your body is beginning to adapt."},{rank:"C",min:12,title:"Trusted Hunter",msg:"Consistency is becoming your strength."},{rank:"B",min:22,title:"Elite Hunter",msg:"Few reach this level of discipline."},{rank:"A",min:35,title:"High-Rank Hunter",msg:"Your presence is growing."},{rank:"S",min:50,title:"Shadow Commander",msg:"You now stand among the strongest."}];
 const SKILLS={pushup:{name:"Push-up Path",need:3,levels:[{name:"Wall Push-ups",tip:"Keep body straight.",mistake:"Avoid bending at hips."},{name:"Knee Push-ups",tip:"Hands under shoulders.",mistake:"Avoid hip sag."},{name:"Full Push-ups",tip:"Straight line head to heels.",mistake:"Avoid flaring elbows."},{name:"Diamond Push-ups",tip:"Hands in diamond.",mistake:"Avoid shrugging."},{name:"Archer Push-ups",tip:"Shift weight to one arm.",mistake:"Avoid twisting hips."},{name:"Pseudo Planche Lean",tip:"Lean forward, straight arms.",mistake:"Avoid bending elbows."}]},squat:{name:"Squat Path",need:3,levels:[{name:"Assisted Squats",tip:"Sit back as into a chair.",mistake:"Avoid knees collapsing."},{name:"Bodyweight Squats",tip:"Knees track over toes.",mistake:"Avoid rising on toes."},{name:"Jump Squats",tip:"Land softly.",mistake:"Avoid locked knees."},{name:"Bulgarian Split Squats",tip:"Front knee over ankle.",mistake:"Avoid knee too far forward."},{name:"Shrimp Squat Progress",tip:"Lower with control.",mistake:"Avoid rushing."},{name:"Pistol Squat Progress",tip:"Use support while building.",mistake:"Avoid knee collapse."}]},core:{name:"Core Path",need:3,levels:[{name:"Knee Plank",tip:"Hips level.",mistake:"Avoid lower back sag."},{name:"Full Plank",tip:"Straight body, breathe.",mistake:"Avoid holding breath."},{name:"Side Plank",tip:"Keep hips high.",mistake:"Avoid rotating hip."},{name:"Hollow Hold",tip:"Lower back pressed down.",mistake:"Avoid arching."},{name:"L-Sit Progress",tip:"Chest tall, lift legs.",mistake:"Avoid rounded shoulders."},{name:"Dragon Flag Progress",tip:"Body rigid.",mistake:"Avoid bending only at hips."}]},pull:{name:"Pull Path",need:3,levels:[{name:"Scapular Pulls",tip:"Pull shoulder blades down.",mistake:"Avoid using arms."},{name:"Australian Pull-ups",tip:"Chest to bar, body straight.",mistake:"Avoid hip sag."},{name:"Negative Pull-ups",tip:"Lower slowly.",mistake:"Avoid dropping fast."},{name:"Pull-ups",tip:"Chin over bar, control down.",mistake:"Avoid swinging."},{name:"Chest-to-Bar",tip:"Chest near bar.",mistake:"Avoid stopping at chin."},{name:"Archer Pull-ups",tip:"Pull to one side.",mistake:"Avoid rotating body."}]}};
 const WORKOUTS=[{id:"e1",rank:"E",name:"First Steps",time:"12 min",xp:50,ex:[{n:"Jumping Jacks",s:2,r:20,u:"reps"},{n:"Knee Push-ups",s:2,r:8,u:"reps"},{n:"Bodyweight Squats",s:2,r:12,u:"reps"},{n:"Knee Plank",s:2,r:20,u:"sec"}]},{id:"e2",rank:"E",name:"Shadow Warm-up",time:"14 min",xp:55,ex:[{n:"High Knees",s:3,r:25,u:"sec"},{n:"Glute Bridges",s:3,r:12,u:"reps"},{n:"Crunches",s:2,r:15,u:"reps"},{n:"Wall Sit",s:2,r:25,u:"sec"}]},{id:"d1",rank:"D",name:"Gate Clear",time:"18 min",xp:85,ex:[{n:"Push-ups",s:3,r:12,u:"reps"},{n:"Squats",s:3,r:15,u:"reps"},{n:"Lunges",s:2,r:10,u:"reps"},{n:"Mountain Climbers",s:3,r:20,u:"reps"},{n:"Plank",s:2,r:35,u:"sec"}]},{id:"d2",rank:"D",name:"Hunter Drill",time:"20 min",xp:95,ex:[{n:"Burpees",s:3,r:8,u:"reps"},{n:"Diamond Push-ups",s:3,r:8,u:"reps"},{n:"Jump Squats",s:3,r:12,u:"reps"},{n:"Russian Twists",s:3,r:20,u:"reps"},{n:"Side Plank",s:2,r:25,u:"sec"}]},{id:"c1",rank:"C",name:"Double Gate",time:"25 min",xp:140,ex:[{n:"Push-ups",s:4,r:15,u:"reps"},{n:"Pike Push-ups",s:3,r:10,u:"reps"},{n:"Lunges",s:3,r:12,u:"reps"},{n:"Burpees",s:3,r:10,u:"reps"},{n:"Leg Raises",s:3,r:12,u:"reps"},{n:"Plank",s:3,r:45,u:"sec"}]},{id:"b1",rank:"B",name:"Elite Trial",time:"30 min",xp:200,ex:[{n:"Push-ups",s:4,r:20,u:"reps"},{n:"Diamond Push-ups",s:3,r:12,u:"reps"},{n:"Jump Squats",s:4,r:15,u:"reps"},{n:"Burpees",s:4,r:12,u:"reps"},{n:"Mountain Climbers",s:3,r:30,u:"reps"},{n:"Plank",s:3,r:60,u:"sec"}]},{id:"a1",rank:"A",name:"High Rank Protocol",time:"35 min",xp:280,ex:[{n:"Push-ups",s:5,r:25,u:"reps"},{n:"Pike Push-ups",s:4,r:12,u:"reps"},{n:"Jump Squats",s:4,r:20,u:"reps"},{n:"Burpees",s:4,r:15,u:"reps"},{n:"Lunges",s:3,r:15,u:"reps"},{n:"Plank",s:3,r:75,u:"sec"}]},{id:"s1",rank:"S",name:"Shadow Commander",time:"45 min",xp:450,ex:[{n:"Push-ups",s:5,r:30,u:"reps"},{n:"Diamond Push-ups",s:4,r:15,u:"reps"},{n:"Pike Push-ups",s:4,r:15,u:"reps"},{n:"Jump Squats",s:5,r:25,u:"reps"},{n:"Burpees",s:5,r:18,u:"reps"},{n:"Mountain Climbers",s:4,r:40,u:"reps"},{n:"Plank",s:4,r:90,u:"sec"}]}];
@@ -271,11 +351,11 @@ const BOSSES=[{id:"boss1",name:"Iron Fortress",desc:"High volume strength test."
 const PROGRAMS=[{id:"p1",name:"Foundation",weeks:2,desc:"Build the basics.",sessions:["e1","e2","d1"]},{id:"p2",name:"Strength Builder",weeks:3,desc:"Push, squat and core.",sessions:["d1","d2","c1"]},{id:"p3",name:"Hunter Path",weeks:4,desc:"Progressive challenge.",sessions:["c1","b1","a1"]}];
 const MISSIONS=[{id:"m1",name:"Forest Scout",mins:30,coins:15,ess:2,xp:25},{id:"m2",name:"Gate Patrol",mins:60,coins:35,ess:5,xp:50},{id:"m3",name:"Shadow Hunt",mins:120,coins:70,ess:12,xp:90}];
 
-let S={name:"",level:1,xp:0,totalXP:0,coins:0,essence:0,stats:{str:10,end:10,agi:10,vit:10},fit:"beginner",goal:"balanced",weekFocus:"balanced",skills:{pushup:{level:0,practice:0},squat:{level:0,practice:0},core:{level:0,practice:0},pull:{level:0,practice:0}},quests:[],doneToday:[],history:[],streak:0,lastDay:null,workouts:0,questsDone:0,weekly:null,bossCleared:[],prs:{},activity:{},activeProgram:null,mission:null,lastHardDay:null,created:null};
-let cur=null,pickData={fit:"",goal:""},restSeconds=90,restInterval=null,restRunning=false;
+let S={name:"",level:1,xp:0,totalXP:0,coins:0,essence:0,stats:{str:10,end:10,agi:10,vit:10},fit:"beginner",goal:"balanced",weekFocus:"balanced",profile:{},skills:{pushup:{level:0,practice:0},squat:{level:0,practice:0},core:{level:0,practice:0},pull:{level:0,practice:0}},quests:[],doneToday:[],history:[],streak:0,lastDay:null,workouts:0,questsDone:0,weekly:null,bossCleared:[],prs:{},activity:{},activeProgram:null,mission:null,lastHardDay:null,created:null};
+let cur=null,OB={areas:[]},restSeconds=90,restInterval=null,restRunning=false;
 
-function save(){try{localStorage.setItem("arise_v9",JSON.stringify(S))}catch(e){}}
-function load(){const raw=localStorage.getItem("arise_v9")||localStorage.getItem("arise_v8")||localStorage.getItem("arise_v7");if(!raw)return false;try{const d=JSON.parse(raw);S={...S,...d};if(!S.skills)S.skills={pushup:{level:0,practice:0},squat:{level:0,practice:0},core:{level:0,practice:0},pull:{level:0,practice:0}};if(S.coins==null)S.coins=0;if(S.essence==null)S.essence=0;if(!S.prs)S.prs={};if(!S.activity)S.activity={};if(!S.bossCleared)S.bossCleared=[];return true}catch(e){return false}}
+function save(){try{localStorage.setItem("arise_v10",JSON.stringify(S))}catch(e){}}
+function load(){const raw=localStorage.getItem("arise_v10")||localStorage.getItem("arise_v9")||localStorage.getItem("arise_v8");if(!raw)return false;try{const d=JSON.parse(raw);S={...S,...d};if(!S.skills)S.skills={pushup:{level:0,practice:0},squat:{level:0,practice:0},core:{level:0,practice:0},pull:{level:0,practice:0}};if(S.coins==null)S.coins=0;if(S.essence==null)S.essence=0;if(!S.prs)S.prs={};if(!S.activity)S.activity={};if(!S.bossCleared)S.bossCleared=[];if(!S.profile)S.profile={};return true}catch(e){return false}}
 function xpNeed(lv){return Math.floor(100*Math.pow(1.28,lv-1))}
 function getRank(lv){let r=RANKS[0];for(const x of RANKS)if(lv>=x.min)r=x;return r}
 function today(){return new Date().toISOString().slice(0,10)}
@@ -283,13 +363,23 @@ function weekKey(){const d=new Date(),onejan=new Date(d.getFullYear(),0,1),week=
 function toast(msg){const t=document.getElementById("toast");t.textContent=msg;t.classList.add("show");clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove("show"),2800)}
 function system(msg){document.getElementById("systemMsg").innerHTML=`<strong>[SYSTEM]</strong> ${msg}`}
 
-function pick(btn,key){btn.parentElement.querySelectorAll(".choice").forEach(b=>b.classList.remove("selected"));btn.classList.add("selected");pickData[key]=btn.dataset.v;if(key==="fit")document.getElementById("b2").disabled=false;if(key==="goal")document.getElementById("b3").disabled=false}
-function goStep(n){if(n===2){const name=document.getElementById("nameInput").value.trim();if(!name){toast("Enter a name");return}pickData.name=name}document.querySelectorAll(".step").forEach(s=>s.classList.remove("active"));document.getElementById("s"+n).classList.add("active")}
-function finishOnboard(){S.name=pickData.name;S.fit=pickData.fit;S.goal=pickData.goal;S.created=Date.now();S.lastDay=today();S.streak=1;const base={beginner:8,intermediate:14,advanced:20}[S.fit]||10;S.stats={str:base,end:base,agi:base,vit:base};S.coins=10;S.essence=1;makeQuests();makeWeekly();save();document.getElementById("onboard").classList.add("hidden");render();system(`Hunter ${S.name} registered. Your Shadow is ready.`);toast("System online")}
+function sel(btn){const k=btn.dataset.k,v=btn.dataset.v;btn.parentElement.querySelectorAll(`.choice[data-k="${k}"]`).forEach(b=>b.classList.remove("selected"));btn.classList.add("selected");OB[k]=v;const nextBtn=document.getElementById("n"+(parseInt(btn.closest(".step").id.slice(1))));if(nextBtn)nextBtn.disabled=false}
+function selMulti(btn){const v=btn.dataset.v;btn.classList.toggle("selected");if(btn.classList.contains("selected")){if(!OB.areas.includes(v))OB.areas.push(v)}else{OB.areas=OB.areas.filter(a=>a!==v)}document.getElementById("n9").disabled=OB.areas.length===0}
+function go(n){if(n===2){const name=document.getElementById("nameInput").value.trim();if(!name){toast("Enter a name");return}OB.name=name}document.querySelectorAll(".step").forEach(s=>s.classList.remove("active"));document.getElementById("s"+n).classList.add("active");document.getElementById("obBar").style.width=Math.round(n/TOTAL_STEPS*100)+"%"}
 
-function makeQuests(){const day=today();if(S.lastDay===day&&S.quests.length)return;if(S.lastDay&&S.lastDay!==day){const y=new Date();y.setDate(y.getDate()-1);const yk=y.toISOString().slice(0,10);if(S.lastDay===yk&&S.doneToday.length)S.streak++;else if(S.lastDay!==yk)S.streak=1;S.doneToday=[]}S.lastDay=day;const r=getRank(S.level).rank,order=["E","D","C","B","A","S"],idx=order.indexOf(r);const pool=WORKOUTS.filter(w=>{const i=order.indexOf(w.rank);return i>=Math.max(0,idx-1)&&i<=Math.min(5,idx+1)});const main=pool[Math.floor(Math.random()*pool.length)]||WORKOUTS[0];let goalQ={strength:{name:"Strength Gate",desc:"40 total push-ups",xp:40},endurance:{name:"Endurance Gate",desc:"3 min cardio moves",xp:40},balanced:{name:"Balanced Hunt",desc:"Finish any ranked workout",xp:35}}[S.goal]||{name:"Daily Duty",desc:"Complete one ranked workout",xp:35};if(S.weekFocus==="skill")goalQ={name:"Skill Practice",desc:"Log practice on any Skill Path",xp:35};S.quests=[{id:"q1",type:"workout",name:main.name,desc:main.time+" · "+main.rank+"-Rank",xp:main.xp,wid:main.id,done:false},{id:"q2",type:"simple",name:goalQ.name,desc:goalQ.desc,xp:goalQ.xp,done:false},{id:"q3",type:"simple",name:"Core Stabilization",desc:"Plank total 90 seconds",xp:30,done:false},{id:"q4",type:"simple",name:"Volume Protocol",desc:"50 squats or 35 push-ups",xp:30,done:false}];save()}
+function finishOnboard(){S.name=OB.name;S.fit=OB.fit||"beginner";S.goal=OB.goal||"balanced";S.weekFocus=OB.goal||"balanced";S.profile={activity:OB.activity,equip:OB.equip,location:OB.location,duration:OB.duration,days:OB.days,areas:OB.areas||[],strength:+OB.strength||2,mobility:+OB.mobility||2,cardio:+OB.cardio||2,motive:OB.motive};S.created=Date.now();S.lastDay=today();S.streak=1;
+const base={beginner:8,intermediate:14,advanced:20}[S.fit]||10;
+const strB=base+((+OB.strength||2)-2)*3;
+const endB=base+((+OB.cardio||2)-2)*3;
+const agiB=base+((+OB.mobility||2)-2)*2;
+S.stats={str:Math.max(5,strB),end:Math.max(5,endB),agi:Math.max(5,agiB),vit:base};
+S.coins=10;S.essence=1;makeQuests();makeWeekly();save();
+document.getElementById("onboard").classList.add("hidden");render();
+system(`Hunter ${S.name} registered. Path calibrated.`);toast("System online")}
+
+function makeQuests(){const day=today();if(S.lastDay===day&&S.quests.length)return;if(S.lastDay&&S.lastDay!==day){const y=new Date();y.setDate(y.getDate()-1);const yk=y.toISOString().slice(0,10);if(S.lastDay===yk&&S.doneToday.length)S.streak++;else if(S.lastDay!==yk)S.streak=1;S.doneToday=[]}S.lastDay=day;const r=getRank(S.level).rank,order=["E","D","C","B","A","S"],idx=order.indexOf(r);const pool=WORKOUTS.filter(w=>{const i=order.indexOf(w.rank);return i>=Math.max(0,idx-1)&&i<=Math.min(5,idx+1)});const main=pool[Math.floor(Math.random()*pool.length)]||WORKOUTS[0];let goalQ={strength:{name:"Strength Gate",desc:"40 total push-ups",xp:40},endurance:{name:"Endurance Gate",desc:"3 min cardio moves",xp:40},balanced:{name:"Balanced Hunt",desc:"Finish any ranked workout",xp:35},skill:{name:"Skill Practice",desc:"Log practice on any Skill Path",xp:35}}[S.goal]||{name:"Daily Duty",desc:"Complete one ranked workout",xp:35};S.quests=[{id:"q1",type:"workout",name:main.name,desc:main.time+" · "+main.rank+"-Rank",xp:main.xp,wid:main.id,done:false},{id:"q2",type:"simple",name:goalQ.name,desc:goalQ.desc,xp:goalQ.xp,done:false},{id:"q3",type:"simple",name:"Core Stabilization",desc:"Plank total 90 seconds",xp:30,done:false},{id:"q4",type:"simple",name:"Volume Protocol",desc:"50 squats or 35 push-ups",xp:30,done:false}];save()}
 function completeQuest(id){const q=S.quests.find(x=>x.id===id);if(!q||q.done)return;q.done=true;S.doneToday.push(id);S.questsDone++;addXP(q.xp,q.name);S.coins+=Math.floor(q.xp/10)+3;S.essence+=1;S.stats.vit++;S.stats.end++;save();render();toast(`Quest cleared · +${q.xp} XP`);system(`Quest “${q.name}” completed.`)}
-function makeWeekly(){const wk=weekKey();if(S.weekly&&S.weekly.week===wk)return;S.weekly={week:wk,name:"Weekly Shadow Task",desc:"Complete 4 ranked workouts this week",need:4,progress:0,xp:220,done:false};save()}
+function makeWeekly(){const wk=weekKey();if(S.weekly&&S.weekly.week===wk)return;const need=S.profile&&S.profile.days?Math.min(6,Math.max(3,+S.profile.days+1)):4;S.weekly={week:wk,name:"Weekly Shadow Task",desc:`Complete ${need} ranked workouts this week`,need,progress:0,xp:220,done:false};save()}
 function updateWeekly(){if(!S.weekly||S.weekly.done)return;S.weekly.progress=Math.min(S.weekly.need,(S.weekly.progress||0)+1);if(S.weekly.progress>=S.weekly.need){S.weekly.done=true;addXP(S.weekly.xp,"Weekly Challenge");S.coins+=40;S.essence+=8;toast("Weekly Challenge cleared");system("Weekly Shadow Task complete.")}save()}
 function setWeekFocus(f){S.weekFocus=f;save();render();toast("Focus updated")}
 
@@ -322,7 +412,7 @@ function startMission(){if(S.mission&&S.mission.ends>Date.now()){toast("Shadow i
 function claimMission(){if(!S.mission)return;if(Date.now()<S.mission.ends){toast("Mission still in progress");return}const m=S.mission;addXP(m.xp,"Shadow Mission");S.coins+=m.coins;S.essence+=m.ess;S.mission=null;save();render();toast(`Loot claimed · +${m.coins} 🪙 · +${m.ess} ✦`);system(`Shadow returned from ${m.name} with loot.`)}
 function renderShadow(){document.getElementById("coinCount").textContent=S.coins||0;document.getElementById("essCount").textContent=S.essence||0;document.getElementById("shadowName").textContent=(S.name?S.name+"'s ":"")+"Shadow";const ctrl=document.getElementById("missionControls");const status=document.getElementById("shadowStatus");if(S.mission){const left=Math.max(0,S.mission.ends-Date.now());if(left>0){const mins=Math.ceil(left/60000);status.textContent=`On mission: ${S.mission.name} (${mins} min left)`;ctrl.innerHTML=`<button class="btn-secondary btn-full" disabled>Mission in progress…</button>`}else{status.textContent=`Returned from ${S.mission.name} — loot ready!`;ctrl.innerHTML=`<button class="btn-success btn-full" onclick="claimMission()">Claim Loot</button>`}}else{status.textContent="Ready for a mission";ctrl.innerHTML=`<button class="btn-primary btn-full" onclick="startMission()">↗ Send Mission</button>`}}
 
-function render(){const r=getRank(S.level);document.getElementById("levelNum").textContent=S.level;document.getElementById("xpText").textContent=`${S.xp} / ${xpNeed(S.level)} XP`;document.getElementById("xpFill").style.width=Math.min(100,S.xp/xpNeed(S.level)*100)+"%";const pill=document.getElementById("rankPill");pill.textContent=r.rank+"-RANK";
+function render(){const r=getRank(S.level);document.getElementById("levelNum").textContent=S.level;document.getElementById("xpText").textContent=`${S.xp} / ${xpNeed(S.level)} XP`;document.getElementById("xpFill").style.width=Math.min(100,S.xp/xpNeed(S.level)*100)+"%";document.getElementById("rankPill").textContent=r.rank+"-RANK";
 renderShadow();
 const doneQ=S.quests.filter(q=>q.done).length;let focus="Complete your Daily Quests";if(doneQ===0)focus="Start with your main ranked workout";else if(doneQ<S.quests.length)focus="Finish remaining Daily Quests";else if(S.weekly&&!S.weekly.done)focus="Push the Weekly Challenge";else focus="Practice a Skill Path or try a Boss Raid";document.getElementById("focusText").textContent=focus;
 const recoverBox=document.getElementById("recoverBox");if(S.lastHardDay===today()&&S.workouts>0){recoverBox.style.display="block";document.getElementById("recoverText").textContent="You already trained hard today. Sleep and easy movement help growth."}else if(S.streak>=5&&doneQ===0){recoverBox.style.display="block";document.getElementById("recoverText").textContent="Long streak. Listening to your body is part of getting stronger."}else recoverBox.style.display="none";
@@ -335,13 +425,13 @@ const sl=document.getElementById("skillList");sl.innerHTML="";Object.keys(SKILLS
 const wl=document.getElementById("workoutList");wl.innerHTML="";WORKOUTS.forEach(w=>{const d=document.createElement("div");d.className="item";d.innerHTML=`<div class="item-row"><div class="item-name">${w.name} <span style="font-size:.7rem;color:var(--faint)">${w.rank}</span></div><div class="item-xp">+${w.xp}</div></div><div class="item-desc">${w.time} · ${w.ex.length} exercises</div><button class="btn-primary" onclick="openWorkout('${w.id}')">Start</button>`;wl.appendChild(d)});
 document.getElementById("weeklyChallenge").innerHTML=S.weekly?`<div class="item ${S.weekly.done?"done":""}"><div class="item-row"><div class="item-name">${S.weekly.name}</div><div class="item-xp">+${S.weekly.xp} XP</div></div><div class="item-desc">${S.weekly.desc}</div><div style="margin-top:4px;font-size:.85rem;color:var(--muted)">Progress: ${S.weekly.progress||0} / ${S.weekly.need}</div></div>`:"<div class='empty'>Loading…</div>";
 const br=document.getElementById("bossRaid");br.innerHTML="";BOSSES.forEach(b=>{const cleared=S.bossCleared.includes(b.id);const d=document.createElement("div");d.className="item boss";d.innerHTML=`<div class="item-row"><div class="item-name">${b.name}${cleared?' <span class="badge">CLEARED</span>':''}</div><div class="item-xp">+${b.xp}</div></div><div class="item-desc">${b.desc}</div><button class="btn-gold" onclick="openWorkout('${b.id}',true)">${cleared?"Raid Again":"Enter Raid"}</button>`;br.appendChild(d)});
-document.getElementById("hunterName").textContent=S.name;document.getElementById("profileLevel").textContent=S.level;document.getElementById("streakNum").textContent=S.streak;const pr=document.getElementById("profileRank");pr.textContent=r.rank+"-RANK";document.getElementById("rankTitle").textContent=r.title;
+document.getElementById("hunterName").textContent=S.name;document.getElementById("profileLevel").textContent=S.level;document.getElementById("streakNum").textContent=S.streak;document.getElementById("profileRank").textContent=r.rank+"-RANK";document.getElementById("rankTitle").textContent=r.title;
 renderPRs();renderCalendar();renderPrograms()}
 
 document.querySelectorAll(".nav-btn").forEach(btn=>{btn.addEventListener("click",()=>{document.querySelectorAll(".nav-btn").forEach(b=>b.classList.remove("active"));document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));btn.classList.add("active");document.getElementById("screen-"+btn.dataset.s).classList.add("active")})});
 function refreshQuests(){S.quests=[];S.doneToday=[];makeQuests();render();toast("Quests refreshed")}
 function exportSave(){const blob=new Blob([JSON.stringify(S,null,2)],{type:"application/json"});const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="arise-"+(S.name||"hunter")+".json";a.click();toast("Exported")}
-function resetAll(){if(confirm("Delete all progress?")){localStorage.removeItem("arise_v9");localStorage.removeItem("arise_v8");localStorage.removeItem("arise_v7");location.reload()}}
+function resetAll(){if(confirm("Delete all progress?")){localStorage.removeItem("arise_v10");localStorage.removeItem("arise_v9");localStorage.removeItem("arise_v8");location.reload()}}
 function init(){if(load()){makeQuests();makeWeekly();document.getElementById("onboard").classList.add("hidden");render();system(`Welcome back, ${S.name}. Rank: ${getRank(S.level).title}.`)}setInterval(renderShadow,30000)}init();
 </script>
 </body>
