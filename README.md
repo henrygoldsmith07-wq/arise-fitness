@@ -1,27 +1,26 @@
 # ARISE — Level Up In Real Life
 
-Clean, gamified fitness app with Solo Leveling ranks + features inspired by **Levla** and top fitness apps.
+Monochrome gamified fitness app (Solo Leveling ranks + Levla-style Shadow Missions).
 
-**Repo:** https://github.com/henrygoldsmith07-wq/arise-fitness  
-**App file:** [index.html](https://github.com/henrygoldsmith07-wq/arise-fitness/blob/main/index.html)
+**Live file:** [index.html](https://github.com/henrygoldsmith07-wq/arise-fitness/blob/main/index.html)
 
-## Levla-inspired systems
-- **Coins & Shadow Essence** — multiple currencies earned from training
-- **Shadow Missions** — send your shadow on passive missions and claim loot later (Levla-style adventures)
-- **Hero / Shadow panel** — your real training powers your shadow
-- Loot after missions and big quests
+## Full Onboarding Flow
+1. Hunter name
+2. Main goal
+3. Experience level
+4. Activity level
+5. Available equipment
+6. Workout location
+7. Preferred workout duration
+8. Preferred days
+9. Body areas to improve
+10. Strength self-check
+11. Mobility self-check
+12. Cardio self-check
+13. Motivation
 
-## Core features
-- Daily Quests & Weekly Challenge
-- Skill Paths with progressive overload (practice → advance)
-- Form tips + common mistakes
-- Boss Raids
-- Rest timer, Personal Records, Activity calendar
-- Structured Programs
-- Rank system: Novice Hunter → Shadow Commander
-- Clean minimal UI
-- Fully offline
+Starting stats and recommended difficulty are calculated from your answers.
 
-Open `index.html` in any modern browser.
+Pure black & white UI · Icons throughout · Offline
 
 Train hard. Level up. Arise.
